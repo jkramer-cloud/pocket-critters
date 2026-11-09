@@ -1,0 +1,852 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#233d44"><title>Pocket Critters · Student Launch · v3.8</title>
+<style>
+:root{--cream:#fff3d4;--ink:#263a46;--night:#1b3440;--gold:#e6b965;--mint:#77c9a5}*{box-sizing:border-box}body{margin:0;min-height:100vh;color:#f6f3e2;font-family:Trebuchet MS,Arial,sans-serif;background:radial-gradient(circle at 52% 16%,#597b81,#182e36 75%);overflow-x:hidden}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #fff0a2;outline-offset:3px}button:disabled{cursor:default;opacity:.54}.hidden{display:none!important}.pixel{image-rendering:pixelated}.sr{position:absolute;width:1px;height:1px;clip:rect(0,0,0,0);overflow:hidden}#meadowView{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:22px 12px 24px;background:radial-gradient(ellipse at 50% -10%,#607d8e,#24383d 64%,#172d32)}.titleTop{text-align:center}.eyebrow{color:#e7cf8a;font-weight:900;letter-spacing:4px;font-size:11px}.titleTop h1{font-family:Georgia,serif;font-size:clamp(28px,4vw,52px);letter-spacing:1px;margin:3px 0 4px;color:#ffeebd;text-shadow:0 4px #283d37}.titleTop p{margin:0;color:#d0e3ce;font-size:13px}.meadowFrame{width:min(1130px,100%);padding:12px;background:#75573f;border:5px solid #c39b62;border-bottom-color:#583e33;border-radius:18px;box-shadow:0 14px 0 #2a292d,0 30px 60px #0008,inset 0 0 0 3px #e2c38c}.meadow{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#78aeb2;border:4px solid #3c443c;border-radius:7px}.meadow canvas{display:block;width:100%;height:100%;image-rendering:pixelated}.eggs{position:absolute;inset:0;pointer-events:none}.egg{position:absolute;width:5.3%;height:9.5%;transform:translate(-50%,-50%);border:0;background:transparent;padding:0;pointer-events:auto;filter:drop-shadow(0 3px 2px #172e3277);transition:filter .14s,scale .14s;outline-offset:2px}.egg svg{width:100%;height:100%;overflow:visible;image-rendering:pixelated}.egg:hover,.egg:focus-visible,.egg.selected{filter:drop-shadow(0 0 5px #fff8c1) drop-shadow(0 0 10px #fff4a0);scale:1.13}.egg.selected:after{content:'◆';position:absolute;color:#fff0a4;top:-20%;left:47%;font-size:12px}.egg.lockedEgg{filter:brightness(.91) drop-shadow(0 2px 1px #234)}.egg.lockedEgg:hover{filter:drop-shadow(0 0 7px #ffecb5)}.meadowBottom{width:min(1130px,100%);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px}.clueCard{min-height:94px;border:2px solid #bea270;background:linear-gradient(135deg,#fff4d9,#ecd8a8);border-radius:13px;color:#3a3b37;padding:12px 18px;box-shadow:0 8px #172a2f}.clueCard strong{display:block;font-family:Georgia,serif;font-size:18px;color:#435944}.clueCard p{font-size:13px;line-height:1.55;margin:6px 0 0}.clueCard .tip{font-size:11px;color:#7b6350}.choose{border:3px solid #e6ca8b;border-bottom:7px solid #846442;border-radius:13px;min-width:180px;padding:10px 18px;background:linear-gradient(#76b77d,#3d8469);color:#fffbe4;font-weight:900;letter-spacing:.7px;box-shadow:0 6px 0 #203d38}.choose:disabled{background:#758984}.meadowFine{font-size:11px;color:#c7d7ce;text-align:center;max-width:1100px;line-height:1.6}
+#petView{min-height:100vh;display:flex;justify-content:center;align-items:center;padding:30px 16px;position:relative;background:linear-gradient(180deg,#92bdd4 0%,#b6d8d1 48%,#91b6a0 49%,#456f68 100%);overflow:hidden}.scenery{position:fixed;inset:0;pointer-events:none}.scenery:before{content:'';position:absolute;left:-5%;right:-5%;height:47%;bottom:23%;background:#86a9ad;clip-path:polygon(0 100%,11% 60%,20% 77%,31% 20%,46% 84%,58% 37%,70% 81%,82% 19%,100% 85%,100% 100%)}.scenery:after{content:'';position:absolute;inset:auto -5% 0;height:42%;background:linear-gradient(#7aa389,#527c69);clip-path:polygon(0 72%,15% 34%,33% 70%,50% 33%,69% 65%,84% 30%,100% 68%,100% 100%,0 100%)}.scenery .sun{position:absolute;right:16%;top:9%;width:88px;height:88px;border-radius:50%;background:#f6e7b6;box-shadow:0 0 0 18px #ffffdf33,0 0 55px #f6efc6}.topBrand{position:absolute;top:10px;left:20px;letter-spacing:2px;color:#d6fff5;font-weight:900;text-shadow:0 2px #456b79;font-size:11px}.panelSide{position:relative;width:225px;align-self:center;padding:18px;border-radius:15px;background:#fff8dfed;color:#31515c;border:2px solid #fff;box-shadow:0 12px 30px #1f465349;margin:0 40px 0 0}.panelSide h2{font-size:14px;letter-spacing:1px;margin:0 0 10px}.panelSide p,.panelSide li{font-size:12px;line-height:1.6}.panelSide kbd{background:#dce9d9;border:1px solid #96b5a0;border-bottom-width:3px;border-radius:4px;padding:1px 5px;font-weight:900}.panelSide hr{border:0;border-top:1px dashed #9cae9a;margin:13px 0}.device{--shell:#e9a9b7;position:relative;width:min(442px,95vw);flex-shrink:0;background:linear-gradient(132deg,#ffe6db 0%,var(--shell) 35%,#d88b9c 83%,#a45d80 100%);border:6px solid #e6b9ad;border-bottom-color:#935b68;border-radius:46% 46% 43% 43% / 26% 26% 34% 34%;box-shadow:inset 8px 10px 12px #fff9,inset -10px -18px 22px #7d38553b,0 15px 0 #804e61,0 30px 60px #193b4eaa;padding:31px 31px 44px;transition:--shell .2s}.device.mint{--shell:#9fd4ba}.device.blue{--shell:#9ac3de}.device.gold{--shell:#eaca8a}.device.violet{--shell:#b6a4db}.badgeLogo{text-align:center;font-family:Georgia,serif;font-weight:900;letter-spacing:1px;color:#fff6e2;text-shadow:1px 3px #9a6377;font-size:17px;margin:3px 0 17px}.badgeLogo small{display:block;font-family:monospace;font-size:9px;letter-spacing:3px;margin-top:2px}.lens{position:relative;padding:9px;background:linear-gradient(138deg,#627b7d,#283d50);border:5px solid #5b6e70;border-bottom-color:#263e49;border-radius:25px;box-shadow:inset 0 4px 7px #0018,0 6px 0 #855668}.lens:before{content:'';display:none;position:absolute;right:20px;top:-17px;color:#486a65;font-size:8px;letter-spacing:1px;background:#fff3d5;border-radius:5px;padding:3px 5px;font-weight:900}.lcd{aspect-ratio:1/1.03;position:relative;overflow:hidden;background:#a8d5b6;border-radius:11px;border:3px solid #213a44;box-shadow:inset 0 0 10px #153c40aa}.lcd canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated}.lcdUI{position:absolute;inset:0;display:flex;flex-direction:column;pointer-events:none}.lcdUI>*{pointer-events:auto}.statusRow{display:flex;justify-content:space-between;gap:4px;align-items:center;padding:5px 8px;background:#f6f2d6e9;border-bottom:2px solid #517e7288;color:#355762;font-size:10px;font-weight:900}.statusRow span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}.meters{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:5px 6px;background:#f1f0d9e6;color:#385b57}.meters label{font-size:8px;display:block;font-weight:900}.meter{height:6px;background:#3b5d5c38;border-radius:5px;overflow:hidden;border:1px solid #3d64653c}.meter i{height:100%;display:block;background:#7dbd8b}.meters .meter:nth-child(1) i{background:#a2ce65}.liveBanner{position:absolute;top:75px;left:8px;right:8px;padding:6px 8px;color:#39564d;font-size:10px;text-align:center;font-weight:900;border:2px solid #e1bf79;border-radius:9px;background:#fff5dce8;pointer-events:none}.bottomUI{margin-top:auto}.speech{background:#fff6dcea;padding:6px 9px;text-align:center;color:#3a5959;min-height:28px;font-size:10px;line-height:1.35;font-weight:900;border-top:2px solid #9ab6a466}.toolbar{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:#e5e8c8ed;padding:6px}.tool{background:linear-gradient(#fff8e3,#e2ead4);border:2px solid #71998b;border-bottom-width:4px;border-radius:7px;min-height:42px;color:#355c5a;font-weight:900;font-size:11px;padding:3px}.tool.active{background:#fae1a7;border-color:#ae8848}.tool .symbol{font-size:16px;display:block;line-height:1.1}.tool:disabled{opacity:.5}.deviceBtns{display:flex;align-items:center;justify-content:center;gap:23px;margin:28px 0 8px}.deviceBtns button{width:67px;height:53px;border-radius:50%;background:linear-gradient(#fff9ec,#bc8297);color:#644b59;border:3px solid #fff5ed;box-shadow:0 7px 0 #9a5875,0 10px 10px #452d3b4d;font-weight:900;font-size:15px}.deviceBtns button:active{transform:translateY(5px);box-shadow:0 2px 0 #9a5875}.deviceBtns button:nth-child(2){transform:translateY(10px)}.deviceBtns button:nth-child(2):active{transform:translateY(15px)}.deviceBtns small{font-size:9px;display:block;letter-spacing:1px}.quickLinks{display:flex;justify-content:center;gap:9px;margin:16px 0 -3px}.quickLinks button{font-size:10px;font-weight:900;border:1px solid #fff6e3;border-bottom:3px solid #986d7b;border-radius:7px;color:#734c61;background:#f8e4d7;padding:5px 9px;box-shadow:0 2px 3px #51384e44}.speakers{display:flex;justify-content:center;gap:8px;margin-top:27px;transform:rotate(-8deg)}.speakers i{width:25px;height:4px;background:#8d607899;border-radius:3px;box-shadow:0 2px #fff7}.deviceFooter{text-align:center;color:#fff2e7;opacity:.9;letter-spacing:2px;font-size:9px;font-weight:900;margin:17px 0 0}.modal{position:absolute;left:7px;right:7px;top:64px;bottom:7px;background:#fff7e8f7;border:3px solid #4e8379;border-bottom-width:5px;border-radius:11px;color:#34515a;overflow:auto;padding:12px;box-shadow:0 3px 12px #204b5077}.modal h2{font-size:13px;font-family:Georgia,serif;margin:0 0 7px;color:#335d50}.modal p{font-size:11px;line-height:1.55;margin:6px 0}.modal button{width:100%;text-align:left;background:#f1f5e4;border:2px solid #95b9a7;border-bottom-width:4px;border-radius:8px;color:#365963;font-size:11px;font-weight:900;padding:8px 9px;margin:4px 0}.modal button.selected{background:#fce4a5;border-color:#c49a55}.modal button:disabled{opacity:.5}.modal .mini{font-size:9px;font-weight:500}.modal .tag{display:inline-block;border-radius:6px;background:#d7e8d4;font-weight:900;font-size:9px;padding:4px 6px;margin:2px}.modal input{width:100%;padding:9px;border:2px solid #86a69a;border-radius:7px;background:#fffcf1;color:#243e49}.modal .note{background:#e5f2e5;border-left:4px solid #72a48a;padding:7px;font-size:10px}.modal .danger{background:#f9e1dd;border-color:#c89691}.modalFooter{position:absolute;bottom:0;left:0;right:0;text-align:center;padding:6px;color:#ecffd8;font-size:10px;pointer-events:none}.moodFlag{font-size:9px;color:#395f56;background:#fff4dcee;display:inline-block;padding:4px;border-radius:6px;margin:3px 0}.previewTiny{width:90px;height:90px;image-rendering:pixelated;background:#b7dac8;border:2px solid #7ba696;border-radius:8px;float:right;margin:0 0 5px 7px}.miniTips{color:#f6ffed;text-align:center;position:relative;margin-left:30px;font-size:12px;line-height:1.8;text-shadow:0 2px 4px #244}.miniTips kbd{background:#d8e9d9;color:#305b5c;border-radius:4px;padding:1px 4px}.navFooter{text-align:center;font-size:11px;color:#f2fadd;margin-top:16px;position:relative}.toast{position:fixed;z-index:9;top:18px;left:50%;transform:translateX(-50%);max-width:90vw;padding:10px 18px;background:#fff5cf;color:#375948;border:2px solid #e4b465;border-radius:12px;box-shadow:0 10px 30px #0005;font-size:12px;font-weight:900;text-align:center}.splash{position:fixed;inset:0;background:#132f35bb;display:grid;place-items:center;z-index:12;padding:15px}.splashCard{width:min(460px,100%);padding:24px;background:#fff3da;color:#324b4e;border:5px solid #d5ad79;border-radius:18px;box-shadow:0 15px 60px #0009}.splashCard h2{font-family:Georgia,serif;margin:0 0 7px}.splashCard p{font-size:13px;line-height:1.6}.splashCard input{width:100%;border:2px solid #95ab98;border-radius:9px;padding:11px;color:#355}.splashCard button{background:#427f67;border:3px solid #245a4e;color:#fff9db;padding:12px 17px;border-radius:9px;margin-top:13px;font-weight:900;width:100%}.splashCard button.secondary{background:#f0deb8;color:#375e56}.splashCard .small{font-size:11px;color:#65766d}
+@media(max-width:1020px){.panelSide{display:none}.miniTips{display:none}.topBrand{position:absolute}}@media(max-width:640px){#meadowView{padding:16px 6px}.meadowFrame{padding:5px;border-width:3px}.meadow{border-width:2px}.egg{width:7.5%;height:13.3%}.meadowBottom{grid-template-columns:1fr}.clueCard{min-height:90px;padding:9px 13px}.choose{min-height:48px}.titleTop h1{font-size:30px}.meadowFine{font-size:10px}.device{width:min(430px,96vw);padding:32px 20px 35px;border-width:5px}.badgeLogo{font-size:14px;margin-bottom:15px}.lens{padding:6px;border-width:5px}.deviceBtns{gap:17px;margin-top:22px}.deviceBtns button{width:62px;height:50px}.speakers{margin-top:19px}.topBrand{display:none}.navFooter{font-size:10px}.statusRow{font-size:9px}}
+.egg.readyEgg{filter:drop-shadow(0 0 3px #fff9c8) drop-shadow(0 0 5px #ffd87a)}.egg.lockedEgg{opacity:.62;filter:grayscale(.55) brightness(.75)}.egg.lockedEgg:after{content:'🔒';position:absolute;bottom:-2px;right:-1px;font-size:clamp(7px,1vw,12px);filter:drop-shadow(0 1px 1px #234)}.egg.readyEgg:hover,.egg.readyEgg:focus-visible{opacity:1;filter:drop-shadow(0 0 5px #fff8c1) drop-shadow(0 0 10px #fff4a0)}
+#nameWrap{display:flex;flex-direction:column;gap:9px;margin:12px 0 17px}#nameWrap.hidden{display:none}#nameWrap label{display:block;font-weight:700;color:#3c5d60;margin:0 0 2px}#nameWrap input{position:relative;width:100%;min-height:46px;padding:10px 12px}#splash .splashCard{max-height:min(88vh,670px);overflow-y:auto}#splash .splashCard h2{line-height:1.22}.qaSpecies{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;margin:9px 0}.qaSpecies button{min-width:0;white-space:normal;font-size:12px;padding:7px}.qaExplainer{padding:8px;background:#e7efd9;border-radius:7px;color:#365149;font-size:12px;margin:8px 0}.qaProgress{background:#e9f3db;padding:8px;border-radius:6px;color:#34564b;font-size:12px;margin:8px 0} 
+
+/* 3.2: The habitat is its own uninterrupted display; care tools sit beneath the glass. */
+.lcd{aspect-ratio:240/220;isolation:isolate}
+.lcd canvas{height:100%;width:100%}
+.lcdUI{inset:0;pointer-events:none}
+.lcdUI .statusRow,.lcdUI .meters,.lcdUI .modal{pointer-events:auto}
+.bottomUI{position:relative;margin:0;background:#e5e8c8;border-radius:0 0 9px 9px;border:0}
+.bottomUI .speech{border-top:2px solid #86aa9a;min-height:30px;white-space:normal}
+.bottomUI .toolbar{padding:6px 5px;gap:4px}
+.bottomUI .tool{min-height:37px;font-size:11px}
+.bottomUI .tool .symbol{font-size:14px}
+.lens{padding-bottom:8px}
+.soundToggle{background:#ffe8c7!important;border-color:#bd8a6a!important}
+@media(max-height:800px) and (min-width:700px){#petView{align-items:flex-start;padding-top:12px;padding-bottom:36px}.device{width:min(402px,90vw);padding:27px 26px 36px}.deviceBtns{margin-top:18px}.quickLinks{margin-top:12px}.speakers{margin-top:18px}.badgeLogo{margin-bottom:13px}}
+
+/* 3.3: tactile collectible decals, no floating marketing badge */
+.lens:before{display:none!important}
+.caseStickers{position:absolute;z-index:2;left:0;right:0;bottom:31px;pointer-events:none;height:28px}
+.caseSticker{position:absolute;display:grid;place-items:center;width:28px;height:28px;background:#fff7df;border:2px solid #fdf0d7;border-radius:50%;box-shadow:0 2px 3px #5436;font-size:18px;transform:rotate(-11deg)}
+.quickLinks{flex-wrap:wrap}.quickLinks button{min-width:70px}.caseSticker0{left:18%}.caseSticker1{left:46%;transform:rotate(10deg)}.caseSticker2{right:18%}
+@media(max-width:420px){.device{width:min(400px,98vw);padding-left:14px;padding-right:14px}.lens{padding:5px}.statusRow{padding:4px 5px}.tool{font-size:10px!important}.quickLinks{gap:5px}.quickLinks button{padding:5px 6px}.caseStickers{bottom:22px}.caseSticker{width:23px;height:23px;font-size:15px}}
+
+/* Animation test controls are displayed only in the teacher's non-destructive preview. */
+.previewControls{display:flex;gap:3px;flex-wrap:wrap;padding:5px 5px 2px;background:#f2eccb;border-top:1px solid #8aaa9c}
+.previewControls.hidden{display:none}.previewControls button{font:700 9px/1.2 Trebuchet MS,Arial,sans-serif;background:#eef3db;border:1px solid #799f92;padding:5px 7px;border-radius:5px;color:#31584c;cursor:pointer}
+.previewControls button.selected{background:#c0edcd;box-shadow:inset 0 0 0 1px #4e9775}
+
+/* v3.7: distinguish gallery previews from the actual saved pet. */
+.previewControls .previewNav{display:flex;align-items:center;gap:4px;width:100%;justify-content:space-between;background:#dcebdc;padding:4px;border-radius:5px;border:1px solid #8fb7a4}
+.previewControls .previewNav strong{color:#345e54;font-size:10px;text-align:center;flex:1;line-height:1.3}
+.previewControls .previewNav button{font-size:10px;white-space:nowrap;min-height:25px}
+.previewControls .assetCheck{width:100%;color:#315f4c;font-size:10px;padding:3px 5px;font-weight:700;text-align:center}
+.previewControls .assetCheck.missing{background:#fff0bd;color:#744832;border:1px solid #c19460;border-radius:4px}
+.bottomUI .speech.gallerySpeech{background:#d5f0e5;color:#285d56;font-weight:700}
+
+/* v3.7.1: scrollable menu content with an always-visible return control */
+.modal{display:flex;flex-direction:column;overflow:hidden;padding:0}
+.modal.hidden{display:none!important}
+.modalBody{min-height:0;flex:1;overflow-y:auto;overscroll-behavior:contain;padding:10px 10px 7px;scrollbar-width:thin}
+.modalNav{flex:none;padding:5px 9px 6px;background:#f5e7c8;border-top:2px solid #a5bda7;box-shadow:0 -3px 8px #31524b20}
+.modal .modalNav button{margin:0;min-height:32px;text-align:center;background:#497f72;border-color:#315f5a;color:white;padding:6px 10px;font-size:11px}
+.modal .modalBody h2{margin:0 0 5px;font-size:13px}
+.modal .modalBody p{margin:5px 0;font-size:10.5px;line-height:1.4}
+.modal .modalBody button{margin:2px 0;padding:6px 8px;font-size:10px;line-height:1.25}
+.modal .choiceGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin:5px 0 8px}
+.modal .choiceGrid button{min-width:0;margin:0;text-align:center;padding:6px 4px}
+.modal .qaSpecies button,.modal .galleryStages button{padding:6px 4px;font-size:10px}
+.sleepTracker{background:#e1e7f5;color:#3b5474;padding:6px 8px;border-top:2px solid #97aed1;font-size:10px;font-weight:700}
+.sleepTracker.hidden{display:none!important}
+.sleepTop{display:flex;gap:5px;align-items:center;justify-content:space-between}
+.sleepTop strong{font-size:11px}.sleepTop span{font-size:10px}
+.sleepTracker button{border:1px solid #5e83aa;background:#fff9e9;color:#3a617c;border-radius:5px;padding:3px 7px;font-size:10px;font-weight:900;cursor:pointer}
+.sleepProgress{height:5px;background:#a8b6d2;border-radius:6px;overflow:hidden;margin:5px 0 2px}
+.sleepProgress i{height:100%;width:0;display:block;background:linear-gradient(90deg,#748ed5,#c4a5e3);border-radius:6px}
+.sleepTracker small{display:block;font-size:9px;font-weight:600;line-height:1.3}
+.sleepSummary{background:#eaf0fa;border:1px solid #aab8d7;border-radius:7px;padding:7px;margin:5px 0;font-size:10px;line-height:1.5}
+@media(max-width:420px){.modalBody{padding:7px 8px 6px}.modal .modalBody button{padding:5px}.modalNav{padding:4px 7px}.sleepTracker{padding:5px 7px}}
+/* v3.7.2: compact daily growth tracker. Saves and animations remain unchanged. */
+.careTracker{background:#e5f1df;color:#315b4c;border-top:2px solid #a4c6aa;padding:6px 8px 5px;font-weight:800;font-size:10px}
+.careTracker.hidden{display:none!important}
+.careTop{display:flex;align-items:center;justify-content:space-between;gap:5px}
+.careTop strong{font-size:10.5px;letter-spacing:.2px}.careTop span{font-size:10px;white-space:nowrap}
+.careProgress{height:6px;background:#bdd3bd;overflow:hidden;border:1px solid #91b69a;border-radius:8px;margin:4px 0 5px}
+.careProgress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#77bb99,#d4ba68);transition:width .35s}
+.careSteps{display:flex;justify-content:space-between;gap:5px;font-size:9px;font-weight:800;line-height:1.3}
+.careSteps .complete{color:#226e4e}.careSteps .pending{color:#856e51}
+.careTracker.finished{background:#d4ebd4}.careTracker.finished .careProgress i{background:#68a878}
+@media(max-width:420px){.careTracker{padding:5px 6px 4px}.careSteps{font-size:8px}}
+/* v3.8: accessible, compact Pet Passport transfer buttons */
+.passportIntro{font-size:11px;color:#f9eac1;margin:1px 0 0;text-align:center}
+.passportIntro button{font-size:12px;font-weight:900;border:2px solid #f4dfa9;border-radius:7px;padding:7px 12px;color:#395c56;background:#fff3cf;cursor:pointer}
+.passportIntro button:hover{background:#fff9e7}
+.passportHint{background:#e8f3e8;border:1px solid #a9cbb0;border-radius:8px;padding:9px;margin:8px 0;font-size:10px;line-height:1.5}
+</style></head><body>
+<section id="meadowView"><div class="titleTop"><span class="eyebrow">A LITTLE WORLD OF WONDER</span><h1>The Hatching Meadow</h1><p>Twenty mystery eggs nestled in the meadow. Ten are ready to hatch!</p></div><div class="meadowFrame"><div class="meadow"><canvas id="meadowCanvas" width="640" height="360" aria-label="Pixel-art hatching meadow with trees, a stream, mountains, flowers, and eggs"></canvas><div class="eggs" id="eggLayer" aria-label="Select an egg"></div></div></div><div class="meadowBottom"><div class="clueCard" id="clueCard"><strong>Find your companion</strong><p>Ten glowing eggs are hatchable today; the other ten are sealed previews. Select a glowing egg to read its clue and hatch it.</p><div class="tip">Mouse / touch: select an egg · Arrow keys: choose · Enter: examine</div></div><button class="choose" id="adoptBtn" disabled>CHOOSE AN EGG</button></div><div class="meadowFine">SANCTUARY UPDATE · Ten species ready to hatch · Up to three companions</div>
+<div class="passportIntro"><button type="button" id="meadowImportPassport">Restore my Pet Passport</button><p>Already have a companion on another device? Bring your saved pet here.</p></div></section>
+<section id="petView" class="hidden"><div class="scenery"><i class="sun"></i></div><div class="topBrand">POCKET CRITTERS · PIXEL COMPANION</div><aside class="panelSide"><h2>CONTROLS</h2><p><kbd>A</kbd> / <kbd>←</kbd> Previous</p><p><kbd>S</kbd> / <kbd>↵</kbd> Select</p><p><kbd>D</kbd> / <kbd>→</kbd> Next</p><hr><p><kbd>J</kbd> Journal<br><kbd>H</kbd> Habitat<br><kbd>O</kbd> Options<br><kbd>P</kbd> Sanctuary<br><kbd>C</kbd> Extra care<br><kbd>Esc</kbd> Close panel</p><hr><p>A meaningful care session earns one growth day. Help your pet and explore or learn; returning repeatedly does not speed up growth.</p></aside><div class="device mint" id="device"><div id="caseStickers" class="caseStickers" aria-label="Achievement stickers on handheld case"></div><div class="badgeLogo">✧ Pocket Critters ✧<small>THE MEADOW EDITION · v3.8</small></div><div class="lens"><div class="lcd"><canvas id="petCanvas" width="240" height="248" aria-label="Your animated pixel pet"></canvas><div class="lcdUI"><div class="statusRow"><span id="petName">Mossling</span><span id="stageName">Hatchling</span><span id="sessionMark">DAY 1</span></div><div class="meters" id="meters"></div><div id="liveBanner" class="liveBanner hidden"></div><div id="modal" class="modal hidden"></div></div></div><div class="bottomUI"><div id="speech" class="speech">Welcome to Pocket Critters!</div><div id="careTracker" class="careTracker hidden" role="group" aria-label="Daily growth progress"><div class="careTop"><strong id="careHeadline">DAILY GROWTH</strong><span id="careRemaining">4:00 left</span></div><div class="careProgress"><i id="careFill"></i></div><div class="careSteps"><span id="careDone">♡ Care needed</span><span id="learnDone">✦ Learn or explore needed</span></div></div><div id="sleepTracker" class="sleepTracker hidden"><div class="sleepTop"><strong>☾ Resting</strong><span id="sleepRemaining">8h 00m left</span><button data-bed title="Wake your pet and return to its regular routine">☀ Wake</button></div><div class="sleepProgress"><i id="sleepFill"></i></div><small id="sleepMessage">No early-wake penalty; partial sleep provides partial energy.</small></div><div id="previewControls" class="previewControls hidden" aria-label="Teacher animation preview controls"></div><div class="toolbar" id="toolbar"></div></div></div><div class="deviceBtns"><button id="prev" aria-label="Previous">A<small>PREV</small></button><button id="select" aria-label="Select">B<small>SELECT</small></button><button id="next" aria-label="Next">C<small>NEXT</small></button></div><div class="quickLinks"><button data-quick="journal">📖 Journal</button><button data-quick="habitat">◈ Habitat</button><button data-quick="options">⚙ Options</button><button data-quick="sanctuary">⌂ Sanctuary</button><button data-quick="care">♡ Care</button></div><div class="speakers"><i></i><i></i><i></i><i></i><i></i></div><div class="deviceFooter">RETRO SOUNDS · OPTIONS TO MUTE</div></div><div class="miniTips">A / ← Previous<br>S / Enter Select<br>D / → Next<br>J Journal · H Habitat · O Options<br>P Sanctuary · C Care</div></section>
+<input id="passportFileInput" type="file" accept=".json,application/json" hidden aria-label="Choose a Pet Passport backup file">
+<div id="toast" class="toast hidden" role="status"></div><div id="splash" class="splash hidden"><div class="splashCard"><h2 id="splashTitle">Adopt your egg?</h2><p id="splashDesc"></p><div id="nameWrap" class="hidden"><label for="nameInput">Your creature's name</label><input id="nameInput" maxlength="18" placeholder="Give your companion a name" autocomplete="off"></div><button id="splashYes">Adopt this egg</button><button class="secondary" id="splashNo">Back to meadow</button><p class="small">No purchases, streaks or penalties for missing school days. Care time counts only while the game is open and active.</p></div></div>
+<script>
+'use strict';
+const $=id=>document.getElementById(id),DAY=86400000,KEY='pocket_critters_meadow_v3_b1',DISC='pocket_critters_discoveries_v3';
+const SLEEP_TARGET_MS=8*60*60*1000, SLEEP_ENERGY_PER_HOUR=5;
+const FOCUS_SECONDS=240, WELCOME_KEY='pocket_critters_first_discovery_v33';
+const SANCTUARY_KEY='pocket_critters_sanctuary_v34',QUESTION_HISTORY='pocket_critters_question_history_v34';
+const playableSpecies=['mossling','petalhorn','ripplet','cindlet','cloudlet','frostell','sporekin','pebblot','moonbat','voltwing'];
+const species=[
+ {id:'mossling',name:'Mossling',type:'Forest',clue:'A soft heartbeat rustles beneath a shell covered in tiny leaf veins.',pos:[7,72],colors:['#86b776','#436f56','#d3df97'],symbol:'leaf'},
+ {id:'petalhorn',name:'Petalhorn',type:'Bloom',clue:'A floral fragrance and a little warmth rise from this blossom-patterned shell.',pos:[16,78],colors:['#e9aac2','#a65d86','#fff0bb'],symbol:'flower'},
+ {id:'pebblot',name:'Pebblot',type:'Stone',clue:'This speckled egg feels heavy and cool, nestled among mossy stones.',pos:[25,69],colors:['#aab4a1','#617969','#d4d1bc'],symbol:'crack'},
+ {id:'sporekin',name:'Sporekin',type:'Fungi',clue:'A faint mushroom scent drifts from a speckled egg in the shade.',pos:[34,77],colors:['#c39db8','#825a89','#f6dcbf'],symbol:'dots'},
+ {id:'ripplet',name:'Ripplet',type:'Water',clue:'This egg is cool to the touch and gently hums beside the stream.',pos:[43,70],colors:['#87c8d9','#3c879d','#f5e4b4'],symbol:'wave'},
+ {id:'tidepup',name:'Tidepup',type:'Coast',clue:'Tiny wave patterns drift beneath its glassy blue shell.',pos:[53,77],colors:['#72b9af','#277e82','#e7f2d1'],symbol:'wave'},
+ {id:'shellumi',name:'Shellumi',type:'Shells',clue:'You hear the faint sound of surf when you listen near this spiral egg.',pos:[62,70],colors:['#e9b7a2','#a7746f','#fff2cf'],symbol:'spiral'},
+ {id:'coralet',name:'Coralet',type:'Reef',clue:'A coral-like texture catches the light, as if the shell grew underwater.',pos:[71,78],colors:['#f29e91','#bb626e','#f7d29a'],symbol:'dots'},
+ {id:'cindlet',name:'Cindlet',type:'Fire',clue:'Warm specks shimmer within the shell, though it never burns your hand.',pos:[80,69],colors:['#e9a265','#a15b51','#ffe1a1'],symbol:'flame'},
+ {id:'emberoo',name:'Emberoo',type:'Warmth',clue:'An amber glow flickers to the beat of something moving inside.',pos:[90,77],colors:['#f4c179','#ac6841','#ffebbd'],symbol:'flame'},
+ {id:'flarefin',name:'Flarefin',type:'Solar',clue:'The shell seems to brighten whenever sunlight touches its stripes.',pos:[9,90],colors:['#e8d078','#b67955','#fff5c1'],symbol:'wave'},
+ {id:'magmuff',name:'Magmuff',type:'Stonefire',clue:'A surprisingly heavy little egg rests near the warm rocks.',pos:[19,91],colors:['#bb7c83','#6c4c61','#f7be80'],symbol:'crack'},
+ {id:'cloudlet',name:'Cloudlet',type:'Cloud',clue:'This impossibly light egg rocks in the gentlest breeze.',pos:[29,88],colors:['#c2def0','#879fc7','#fff6de'],symbol:'cloud'},
+ {id:'voltwing',name:'Voltwing',type:'Storm',clue:'A harmless static tickle jumps between the shell’s jagged markings.',pos:[39,92],colors:['#9fb5dc','#5e71a1','#f0da83'],symbol:'bolt'},
+ {id:'breezetail',name:'Breezetail',type:'Wind',clue:'Soft whistles seem to circle this long, feather-patterned egg.',pos:[49,88],colors:['#acdcc9','#6da6ad','#f6e8bd'],symbol:'wave'},
+ {id:'starfloat',name:'Starfloat',type:'Cosmos',clue:'The tiny lights on this dark shell look strangely like constellations.',pos:[59,91],colors:['#858dc3','#464f90','#fff0bb'],symbol:'star'},
+ {id:'frostell',name:'Frostell',type:'Arctic',clue:'A dusting of frost never melts around this glittering pale egg.',pos:[69,88],colors:['#d5e8ee','#7fabc1','#ffffff'],symbol:'crack'},
+ {id:'moonbat',name:'Moonbat',type:'Night',clue:'The shell is strangely quiet until a cloud passes over the sun.',pos:[79,92],colors:['#aba1c7','#5c5b86','#efdbeb'],symbol:'moon'},
+ {id:'duskkit',name:'Duskkit',type:'Shadow',clue:'Shadows seem to pool around the shell, though the air is bright.',pos:[88,88],colors:['#9593a7','#514e72','#d7d2e9'],symbol:'moon'},
+ {id:'glimlet',name:'Glimlet',type:'Crystal',clue:'A few geometric facets glint like tiny gemstones in the grass.',pos:[96,90],colors:['#c5a7dd','#866aaf','#e9e3ff'],symbol:'star'}];
+let selected=-1, view='meadow',panel='',tabIndex=0,quiz=null,quizChoice=0,toastTimer=0,moodPreview='',animStamp=0,sound=true;
+try{sound=localStorage.getItem('pocketcritters_sound_v32')!=='off'}catch(e){}
+const blank=()=>({version:3,kind:'mossling',name:'',shell:'mint',hatchedAt:0,lastActive:0,lastCareDay:'',lastLearnDay:'',lastExploreDay:'',lastCleanDay:'',careCount:0,exp:0,stage:2,maxStage:2,hunger:85,joy:84,energy:87,clean:83,branch:'forest',habitat:'forest',explored:0,learned:0,correct:0,wrong:0,careSessions:0,regressCount:0,careActions:{},exploreFlags:{},seenStages:[2],vacation:false,lastMessage:'A brand new friend awaits.',focusDay:'',focusSeconds:0,focusCare:false,focusLearn:false,stickers:[],placedStickers:[],asleep:false,illness:false,mess:false,caretakerUntil:0,lastBathDay:'',lastClinicDay:'',lastComfortDay:'',difficulty:'normal',sleepStartedAt:0});
+let pet=blank();try{let p=JSON.parse(localStorage.getItem(KEY)||'null');if(p?.version===3&&p?.name&&playableSpecies.includes(p.kind))pet={...blank(),...p}}catch(e){};
+let discoveries={};try{discoveries=JSON.parse(localStorage.getItem(DISC)||'{}')||{}}catch(e){};
+// v3 saves stay valid. Companions at rest cannot lose needs or evolution stages.
+let roster=[], activeSlot=0, newSlot=-1;
+try {const old=JSON.parse(localStorage.getItem(SANCTUARY_KEY)||'null');
+  if(old&&Array.isArray(old.pets)){roster=old.pets.filter(x=>x&&x.name&&playableSpecies.includes(x.kind)).slice(0,3).map(x=>({...blank(),...x}));activeSlot=Math.min(Math.max(0,old.active||0),Math.max(0,roster.length-1));if(roster.length)pet=roster[activeSlot];}}
+catch(e){}
+if(!roster.length&&pet.name){roster=[pet];activeSlot=0}
+function saveRoster(){try{localStorage.setItem(SANCTUARY_KEY,JSON.stringify({active:activeSlot,pets:roster}))}catch(e){}}
+function switchCompanion(i){if(i<0||i>=roster.length||i===activeSlot)return;persist();activeSlot=i;pet=roster[i];stageNames=stageNamesBySpecies[pet.kind]||stageNamesBySpecies.mossling;pet.lastActive=Date.now();panel='';moodPreview='';tabIndex=0;persist();render();notify('Welcome back, '+pet.name+'!')}
+
+const today=()=>new Date().toLocaleDateString('en-CA',{year:'numeric',month:'2-digit',day:'2-digit'});
+const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify(pet));localStorage.setItem(DISC,JSON.stringify(discoveries));if(pet.name){roster[activeSlot]=pet;saveRoster()}}catch(e){}};
+
+/* Pocket Critters v3.8 - Pet Passport: portable, no login or remote upload.
+   The import never sends files to a server and doesn't silently merge or overwrite. */
+const PASSPORT_FORMAT='pocket-critters-passport',PASSPORT_VERSION=1;
+function passportDownload(payload,fileName){
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+ const url=URL.createObjectURL(blob),link=document.createElement('a');
+ link.href=url;link.download=fileName;document.body.append(link);link.click();link.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),30000);
+}
+function currentPassport(){
+ persist();
+ return {format:PASSPORT_FORMAT,version:PASSPORT_VERSION,exportedAt:new Date().toISOString(),
+  active:activeSlot,pets:roster.map(x=>({...x})),discoveries:{...discoveries},
+  questionHistory:[...questionHistory],sound:!!sound};
+}
+function exportPetPassport(){
+ if(!pet.name||!roster.length){notify('Adopt a pet first, or restore an existing Passport.');return}
+ try{
+  const data=currentPassport(),stamp=new Date().toISOString().slice(0,10);
+  passportDownload(data,'Pocket_Critters_Pet_Passport_'+stamp+'.json');
+  notify('Pet Passport saved! Keep the file somewhere safe.');
+ }catch(e){notify('Could not save Passport: check browser download permissions.')}
+}
+function sanitizePassportPet(src){
+ if(!src||typeof src!=='object'||Array.isArray(src)||src.version!==3||!playableSpecies.includes(src.kind)||typeof src.name!=='string')throw Error('Passport contains a pet this release cannot recognize.');
+ const clean={...blank()};
+ for(const [k,def] of Object.entries(clean)){
+  const v=src[k];
+  if(typeof def==='number'&&typeof v==='number'&&Number.isFinite(v))clean[k]=Math.max(0,Math.min(1e14,v));
+  else if(typeof def==='boolean'&&typeof v==='boolean')clean[k]=v;
+  else if(typeof def==='string'&&typeof v==='string')clean[k]=v.replace(/[<>&"'`]/g,'').slice(0,k==='name'?18:k==='lastMessage'?140:60);
+  else if(Array.isArray(def)&&Array.isArray(v))clean[k]=v.slice(0,80).filter(x=>typeof x==='string'||(typeof x==='number'&&Number.isFinite(x))).map(x=>typeof x==='string'?x.replace(/[<>&"'`]/g,'').slice(0,40):x);
+  else if(def&&typeof def==='object'&&v&&typeof v==='object'&&!Array.isArray(v)){
+   const obj=Object.create(null);
+   for(const [key,val] of Object.entries(v).slice(0,80)){
+    if(!/^[\w-]{1,32}$/.test(key))continue;
+    if(Array.isArray(val))obj[key]=val.slice(0,30).filter(x=>typeof x==='string').map(x=>x.replace(/[^a-z\w-]/gi,'').slice(0,32));
+    else if(typeof val==='boolean')obj[key]=val;
+   }
+   clean[k]=obj;
+  }
+ }
+ clean.kind=src.kind;
+ clean.name=clean.name.trim();
+ if(!clean.name)throw Error('Passport contains an unnamed pet.');
+ clean.stage=Math.max(2,Math.min(6,Math.floor(clean.stage)));
+ clean.maxStage=Math.max(clean.stage,Math.min(6,Math.floor(clean.maxStage)));
+ clean.hunger=Math.min(100,clean.hunger);clean.joy=Math.min(100,clean.joy);
+ clean.energy=Math.min(100,clean.energy);clean.clean=Math.min(100,clean.clean);
+ if(!['mint','blue','gold','violet'].includes(clean.shell))clean.shell='mint';
+ if(!['forest','meadow','twilight','pond'].includes(clean.habitat))clean.habitat='forest';
+ return clean;
+}
+function validatePassport(raw){
+ if(!raw||raw.format!==PASSPORT_FORMAT||raw.version!==PASSPORT_VERSION||!Array.isArray(raw.pets)||raw.pets.length<1||raw.pets.length>3)throw Error('This is not a supported Pocket Critters Pet Passport.');
+ const pets=raw.pets.map(sanitizePassportPet);
+ let active=Number.isInteger(raw.active)?raw.active:0;
+ active=Math.max(0,Math.min(pets.length-1,active));
+ const importedDiscoveries={};
+ if(raw.discoveries&&typeof raw.discoveries==='object'&&!Array.isArray(raw.discoveries))for(const id of playableSpecies)if(raw.discoveries[id])importedDiscoveries[id]=raw.discoveries[id];
+ const importedHistory=Array.isArray(raw.questionHistory)?raw.questionHistory.filter(q=>typeof q==='string').slice(0,300).map(q=>q.slice(0,250)):[];
+ return {pets,active,discoveries:importedDiscoveries,questionHistory:importedHistory,sound:raw.sound!==false};
+}
+async function importPetPassport(file){
+ if(!file)return;
+ if(file.size>1024*1024){notify('Passport file is too large.');return}
+ let result;
+ try{result=validatePassport(JSON.parse(await file.text()))}
+ catch(e){alert('Could not restore Pet Passport. '+e.message+'\nYour current pets have not been changed.');return}
+ const names=result.pets.map(x=>x.name).join(', ');
+ const warning=roster.length?`Your current companions (${roster.map(x=>x.name).join(', ')}) will be REPLACED on this browser.\n\nDownload a backup of this device first if you want to keep them.\n\n`:'';
+ if(!confirm(`Restore these ${result.pets.length} companions?\n${names}\n\n${warning}This replaces this browser's existing Pocket Critters progress. Continue?`))return;
+ try{
+  // Make a safety copy of the current collection before replacing it.
+  if(roster.length){passportDownload(currentPassport(),'Pocket_Critters_Before_Import_Backup.json')}
+  roster=result.pets;activeSlot=result.active;pet=roster[activeSlot];discoveries=result.discoveries;
+  questionHistory=result.questionHistory;sound=result.sound;
+  localStorage.setItem('pocketcritters_sound_v32',sound?'on':'off');
+  localStorage.setItem(QUESTION_HISTORY,JSON.stringify(questionHistory));
+  localStorage.setItem(WELCOME_KEY,'seen');
+  stageNames=stageNamesBySpecies[pet.kind]||stageNamesBySpecies.mossling;
+  panel='';quiz=null;selected=-1;moodPreview='';tabIndex=0;
+  persist();$('splash').classList.add('hidden');startPet();
+  notify('Passport restored! Welcome back, '+pet.name+'.');
+ }catch(e){alert('The Passport could not be saved on this browser. Check storage settings.');}
+}
+
+const stageNamesBySpecies={
+ mossling:['','Egg','Hatchling','Sproutcub','Leafrunner','Grove Guardian','Elderwood Spirit'],
+ petalhorn:['','Egg','Budling','Petalfawn','Blossomrunner','Bloomhart','Petal Monarch'],
+ ripplet:['','Egg','Droplet','Paddlet','Shellglider','Tidekeeper','Reef Leviathan'],
+ cindlet:['','Egg','Sparkpup','Ashkit','Flamefox','Inferno Guardian','Sunfire Kitsune'],
+ cloudlet:['','Egg','Pufflet','Skydown','Breezewing','Cloud Sentinel','Tempest Seraph'],
+ frostell:['','Egg','Snowpup','Flurryfox','Frosttail','Crystal Fox','Aurora Guardian'],
+ sporekin:['','Egg','Sporebud','Mushling','Bloomcap','Mycelium Keeper','Fungal Monarch'],
+ pebblot:['','Egg','Pebbleling','Mossback','Crystalback','Stone Sentinel','Everstone Colossus'],
+ moonbat:['','Egg','Moonpup','Nightglider','Crescentwing','Lunar Guardian','Eclipse Sovereign'],
+ voltwing:['','Egg','Sparkchick','Stormfledgling','Thunderwing','Skybreaker','Tempest Phoenix']
+};
+let stageNames=stageNamesBySpecies[pet.kind]||stageNamesBySpecies.mossling;
+const curSpecies=()=>species.find(s=>s.id===pet.kind)||species[0];
+const curName=()=>curSpecies().name;
+const curType=()=>curSpecies().type;
+
+const stageThreshold=[0,0,0,2,5,9,15]; // one counted care day per calendar date
+const daysUntilNext=()=>pet.stage<pet.maxStage?0:(pet.maxStage>=6?0:Math.max(0,stageThreshold[pet.maxStage+1]-pet.careSessions));
+const qaNames={1:'Egg',2:'Hatchling',3:'Youngling',4:'Adolescent',5:'Adult',6:'Mythic'};
+const moodOptions=['happy','excited','sleepy','sad','dirty','sick'];
+function notify(msg){$('toast').textContent=msg;$('toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),2700)}
+function isCareDay(){return pet.lastCareDay===today()}
+function sleepInfo(at=Date.now()){
+ const start=Number(pet.sleepStartedAt)||at;
+ const elapsed=Math.max(0,Math.min(SLEEP_TARGET_MS,at-start));
+ const left=SLEEP_TARGET_MS-elapsed;
+ const remaining=left===0?'Ready to wake':`${Math.floor(Math.ceil(left/60000)/60)}h ${String(Math.ceil(left/60000)%60).padStart(2,'0')}m left`;
+ const spent=Math.floor(elapsed/60000);
+ return {elapsed,left,remaining,spent,progress:elapsed/SLEEP_TARGET_MS,energy:Math.min(40,Math.floor(elapsed/(60*60*1000)*SLEEP_ENERGY_PER_HOUR))};
+}
+function refreshCareTracker(){
+ const el=$('careTracker');if(!el||!pet.name)return;
+ const visible=view==='pet'&&!pet.asleep&&!pet.vacation&&!(pet.caretakerUntil>Date.now())&&panel!=='showcase';
+ el.classList.toggle('hidden',!visible);if(!visible)return;
+ currentFocus();const complete=isCareDay();const secs=Math.max(0,FOCUS_SECONDS-Math.min(FOCUS_SECONDS,pet.focusSeconds));
+ $('careHeadline').textContent=complete?'✦ Growth earned today':'♡ Daily care progress';
+ $('careRemaining').textContent=complete?'Ready again tomorrow':Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0')+' remaining';
+ $('careFill').style.width=(complete?100:100*Math.min(FOCUS_SECONDS,pet.focusSeconds)/FOCUS_SECONDS).toFixed(1)+'%';
+ el.classList.toggle('finished',complete);
+ const care=$('careDone'),learn=$('learnDone');
+ care.textContent=complete||pet.focusCare?'✓ Care completed':'○ Feed, clean, play or rest';
+ learn.textContent=complete||pet.focusLearn?'✓ Discovery completed':'○ Learn or explore';
+ care.className=complete||pet.focusCare?'complete':'pending';
+ learn.className=complete||pet.focusLearn?'complete':'pending';
+}
+function refreshSleepDisplay(){
+ const shown=pet.asleep&&!pet.vacation&&!(pet.caretakerUntil>Date.now())&&panel!=='showcase';
+ const box=$('sleepTracker');if(!box)return;
+ box.classList.toggle('hidden',!shown);$('speech').classList.toggle('hidden',shown);
+ if(!shown)return;
+ const r=sleepInfo();$('sleepRemaining').textContent=r.remaining;
+ const modalTime=$('careSleepRemaining'),modalSpent=$('careSleepSpent'),modalEnergy=$('careSleepEnergy');
+ if(modalTime)modalTime.textContent=r.remaining;
+ if(modalSpent)modalSpent.textContent=Math.floor(r.spent/60)+'h '+String(r.spent%60).padStart(2,'0')+'m';
+ if(modalEnergy)modalEnergy.textContent='+'+r.energy;
+ $('sleepFill').style.width=(r.progress*100).toFixed(1)+'%';
+ $('sleepMessage').textContent=r.left===0?'Fully rested. Wake whenever you are ready.':`Rested ${Math.floor(r.spent/60)}h ${String(r.spent%60).padStart(2,'0')}m · Estimated energy +${r.energy}. Early wake has no extra penalty.`;
+}
+function toggleBedtime(){
+ if(pet.caretakerUntil>Date.now()){notify('Your caretaker is looking after this pet.');return}
+ if(!pet.asleep){pet.asleep=true;pet.lastActive=Date.now();pet.sleepStartedAt=Date.now();pet.lastMessage='Lights out. Time for a peaceful rest.';lastAction='rest';lastActionTime=performance.now();effect('rest');}
+ else {const r=sleepInfo();pet.energy=Math.min(100,pet.energy+r.energy);if(r.left===0)pet.joy=Math.min(100,pet.joy+5);pet.asleep=false;pet.sleepStartedAt=0;pet.lastActive=Date.now();pet.lastMessage=r.left===0?`Good morning! Fully rested (+${r.energy} energy).`:`Good morning! Partly rested (+${r.energy} energy).`;lastAction='idle';lastActionTime=performance.now();effect(r.left===0?'grow':'tap');}
+ persist();render();
+}
+setInterval(()=>{if(view!=='pet'||!pet.name||document.hidden)return;
+ if(pet.asleep)refreshSleepDisplay();else refreshCareTracker();
+},15000);
+document.addEventListener('visibilitychange',()=>{if(view==='pet'&&!document.hidden){refreshSleepDisplay();refreshCareTracker()}});
+function currentFocus(){
+ const d=today();if(pet.focusDay!==d){pet.focusDay=d;pet.focusSeconds=0;pet.focusCare=false;pet.focusLearn=false}
+}
+function careProgressText(){
+ currentFocus();if(isCareDay())return 'Today’s growth is earned. Your companion can rest.';
+ const min=Math.floor(Math.max(0,FOCUS_SECONDS-pet.focusSeconds)/60),sec=Math.max(0,FOCUS_SECONDS-pet.focusSeconds)%60;
+ const timeLeft=min+':'+String(sec).padStart(2,'0');
+ return 'Care session '+Math.min(100,Math.floor(100*pet.focusSeconds/FOCUS_SECONDS))+'% · '+timeLeft+' of active care left · '+(!pet.focusCare?'care needed':'care ✓')+' · '+(!pet.focusLearn?'learn/explore needed':'learning ✓');
+}
+function unlockStickers(){
+ if(!pet.name)return;const options=[['egg','🥚','First discovery',true],['heart','💚','Caring companion',pet.careSessions>=1],['book','📚','Curious mind',pet.correct>=3],['leaf','🌿','Explorer',pet.explored>=3],['crown','👑','Grown together',pet.maxStage>=5],['star','⭐','Legendary bond',pet.maxStage>=6]];
+ const had=new Set(pet.stickers||[]);for(const [id,icon,label,ok] of options)if(ok&&!had.has(id)){had.add(id);if(id!=='egg')notify('Sticker unlocked: '+label+'!')}
+ pet.stickers=[...had];return options;
+}
+function updateStickers(){
+ const el=$('caseStickers');if(!el)return;
+ const icons={egg:'🥚',heart:'💚',book:'📚',leaf:'🌿',crown:'👑',star:'⭐'};
+ const safe=(pet.placedStickers||[]).slice(0,3).filter(id=>(pet.stickers||[]).includes(id));
+ el.innerHTML=safe.map((id,i)=>`<span class="caseSticker caseSticker${i}" title="${id} achievement">${icons[id]||'⭐'}</span>`).join('');
+}
+function awardCareDay(){
+ currentFocus();if(!pet.name||pet.vacation||isCareDay()||pet.focusSeconds<FOCUS_SECONDS||!pet.focusCare||!pet.focusLearn)return false;
+ pet.lastCareDay=today();pet.careSessions++;if(pet.careSessions%3===0)pet.mess=true;pet.exp++;pet.lastActive=Date.now();advance();unlockStickers();persist();render();notify('Care day completed! Your companion grew stronger.');return true;
+}
+let saveTick=0;
+setInterval(()=>{
+ if(!pet.name||pet.vacation||pet.asleep||pet.caretakerUntil>Date.now()||isCareDay()||view!=='pet'||panel==='showcase'||panel==='gallery'||document.hidden||!document.hasFocus())return;
+ currentFocus();if(pet.focusSeconds>=FOCUS_SECONDS)return;
+ pet.focusSeconds=Math.min(FOCUS_SECONDS,pet.focusSeconds+1);saveTick++;
+ if(saveTick%5===0)persist();
+ if(!awardCareDay())refreshCareTracker()
+},1000);
+
+function petMood(){if(moodPreview)return moodPreview;if(pet.illness)return'sick';if(pet.asleep||pet.caretakerUntil>Date.now())return'sleepy';if(pet.clean<54&&pet.energy<49)return'sick';if(pet.clean<40)return'dirty';if(pet.hunger<34)return'sad';if(pet.energy<37)return'sleepy';if(pet.joy<36)return'sad';if(pet.joy>88)return'excited';return'happy'}
+function inactiveCare(){if(!pet.name||pet.vacation)return;if(pet.caretakerUntil&&Date.now()<pet.caretakerUntil){pet.lastActive=Date.now();return}const now=Date.now();if(pet.caretakerUntil){pet.lastActive=Math.max(pet.lastActive||0,Math.min(now,pet.caretakerUntil));pet.caretakerUntil=0;pet.asleep=false;pet.sleepStartedAt=0}if(pet.asleep){pet.lastActive=now;return}let gap=(now-(pet.lastActive||now))/DAY;if(gap<1)return;const days=Math.min(40,Math.floor(gap));pet.hunger=Math.max(35,pet.hunger-Math.max(0,days-4)*2);pet.joy=Math.max(35,pet.joy-Math.max(0,days-4)*2);pet.energy=Math.max(40,pet.energy-Math.max(0,days-4));pet.clean=Math.max(40,pet.clean-Math.max(0,days-4));if(days>=11){const setbacks=days>=21?2:1;pet.stage=Math.max(2,pet.maxStage-setbacks);pet.regressCount=Math.max(pet.regressCount,setbacks)}pet.lastActive=now;if(pet.clean<46&&pet.energy<50)pet.illness=true;persist()}
+if(pet.name){stageNames=stageNamesBySpecies[pet.kind]||stageNamesBySpecies.mossling;inactiveCare();view='pet'}
+function meadowBg(){const c=$('meadowCanvas'),g=c.getContext('2d');g.imageSmoothingEnabled=false;const box=(x,y,w,h,col)=>{g.fillStyle=col;g.fillRect(x,y,w,h)};let seed=993;function rnd(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296}function tri(points,col){g.fillStyle=col;g.beginPath();g.moveTo(...points[0]);for(let i=1;i<points.length;i++)g.lineTo(...points[i]);g.closePath();g.fill()}
+box(0,0,640,360,'#8bc4c8');for(let y=0;y<160;y+=4){box(0,y,640,4,y<76?'#89c0cb':y<130?'#add6c8':'#bbd7b4')}box(471,26,35,35,'#fff3c6');box(463,34,51,19,'#fff3c6');for(let i=0;i<12;i++){let x=Math.floor(rnd()*630),y=22+Math.floor(rnd()*96),w=16+Math.floor(rnd()*42);box(x,y,w,4,'#e2ebd4');box(x+7,y-5,w*.55,5,'#e4ebd7')}
+for(let i=0;i<7;i++){let x=i*112-60,h=74+(i*17)%87;tri([[x,205],[x+65,205-h],[x+135,205]],i%2?'#7ba99e':'#94b8ae');tri([[x+45,205-h+31],[x+65,205-h],[x+86,205-h+31]],'#d2e2d5')}
+box(0,194,640,166,'#8ac08f');tri([[0,248],[65,214],[156,255],[260,208],[366,250],[475,204],[640,257],[640,360],[0,360]],'#6ca87e');tri([[0,290],[115,254],[245,292],[363,235],[496,301],[640,246],[640,360],[0,360]],'#55976f');for(let x=0;x<640;x+=9){box(x,296+(x*7%9),9,70,x%3?'#63a573':'#68a97a')}
+// Winding stream with pixel-highlighted banks.
+g.fillStyle='#e2d29c';g.beginPath();g.moveTo(271,175);g.bezierCurveTo(240,210,368,225,280,254);g.bezierCurveTo(202,290,362,295,314,360);g.lineTo(417,360);g.bezierCurveTo(394,298,307,290,360,257);g.bezierCurveTo(428,221,289,202,329,175);g.fill();g.fillStyle='#6cb7bf';g.beginPath();g.moveTo(286,175);g.bezierCurveTo(246,215,390,224,299,256);g.bezierCurveTo(237,296,374,300,344,360);g.lineTo(398,360);g.bezierCurveTo(373,295,287,289,344,255);g.bezierCurveTo(402,217,275,209,317,175);g.fill();for(let i=0;i<33;i++){let x=280+rnd()*105,y=193+rnd()*164;box(x,y,10+rnd()*12,2,'#c9eef0')}
+// Trees with distinct foliage volumes and shaded trunks.
+const tree=(x,y,s)=>{box(x-5*s,y-7*s,10*s,36*s,'#795d44');box(x-2*s,y-4*s,4*s,35*s,'#aa8056');for(let k=0;k<3;k++){let yy=y-(k*15+20)*s,w=(35-k*7)*s;tri([[x-w,yy+17*s],[x,yy-24*s],[x+w,yy+17*s]],k%2?'#245b4c':'#33775b');box(x-w*.35,yy-3*s,14*s,5*s,'#519879')}};
+for(let [x,y,s] of [[47,207,1.2],[103,185,.9],[545,189,1.15],[600,216,1.25],[169,207,.72],[435,215,.68],[20,284,.8],[624,294,.75]])tree(x,y,s);
+for(let i=0;i<110;i++){let x=rnd()*640,y=238+rnd()*122;if(x>250&&x<396)continue;box(x,y,2,5,'#367d5e');box(x-2,y,6,2,(['#f9dfa0','#f2bdd1','#eaf1da','#c6d5f1'][i%4]));box(x,y-1,2,2,'#fff4c6')}
+for(let i=0;i<24;i++){let x=rnd()*620,y=227+rnd()*110;if(x>248&&x<390)continue;box(x,y,11,7,'#9f9a80');box(x+2,y,6,2,'#c6b9a0')}
+// Stumps, mushroom clusters, reeds and crystal bank.
+for(let i=0;i<4;i++){let x=44+i*13,y=288+i%2*6;box(x,y,5,12,'#e9d4be');box(x-4,y-5,14,7,'#c87491');box(x,y-4,3,2,'#fff5d5')}
+for(let i=0;i<4;i++){let x=465+i*13,y=283+(i%3)*5;tri([[x,y+17],[x+5,y-8],[x+12,y+17]],['#bba8e2','#8bd9d5','#d7c3ed','#9bcce1'][i]);box(x+4,y+6,3,4,'#fff8ea')}
+for(let i=0;i<5;i++){let x=382+i*13;box(x,310,2,24,'#3e8876');box(x+4,306,2,25,'#568e7d');box(x+1,307,4,5,'#b69d67')}
+}
+function eggSvg(s){let [light,dark,detail]=s.colors,ink='#39444f';let sym={leaf:'<path d="M30 23 Q19 12 17 29 Q24 37 30 23 M30 23 L22 30"/>',flower:'<path d="M26 18 Q15 19 24 25 Q13 28 26 31 Q27 39 32 30 Q44 30 34 24 Q37 15 29 21"/>',bark:'<path d="M21 20 L25 26 L20 31 M36 21 L32 29 L37 34"/>',dots:'<circle cx="23" cy="23" r="3"/><circle cx="34" cy="29" r="4"/><circle cx="26" cy="37" r="2"/>',wave:'<path d="M17 27 Q23 20 29 27 T42 27 M18 35 Q25 29 32 35 T41 35"/>',spiral:'<path d="M29 22 Q39 19 39 29 Q39 39 28 37 Q19 35 22 27 Q25 22 31 27 Q33 31 29 32"/>',flame:'<path d="M29 19 Q34 27 31 31 Q40 30 36 23 Q44 35 32 40 Q18 42 20 31 Q21 26 29 19"/>',crack:'<path d="M25 16 L31 24 L26 29 L33 35 L30 42"/>',cloud:'<path d="M17 31 Q16 23 24 24 Q26 15 34 22 Q45 22 41 32 Z"/>',bolt:'<path d="M33 17 L24 29 L31 29 L26 42 L39 25 L31 25 Z"/>',star:'<path d="M30 15 L34 25 L44 29 L34 33 L30 43 L26 33 L16 29 L26 25 Z"/>',moon:'<path d="M35 18 Q17 25 26 40 Q18 36 19 26 Q21 18 35 18"/>'}[s.symbol]||'';return `<svg viewBox="0 0 60 64" aria-hidden="true"><ellipse cx="30" cy="59" rx="19" ry="4" fill="#243b4270"/><path d="M30 5 C12 5 10 27 11 39 C12 57 47 57 49 40 C51 26 45 5 30 5Z" fill="${dark}" stroke="${ink}" stroke-width="2"/><path d="M30 9 C15 10 15 29 16 40 C17 52 43 53 45 39 C46 26 42 9 30 9Z" fill="${light}"/><path d="M21 16 C23 12 27 11 32 11" fill="none" stroke="${detail}" stroke-width="4" stroke-linecap="round"/><path d="M19 37 Q20 49 36 48" fill="none" stroke="${detail}" stroke-width="2" opacity=".7"/><g fill="none" stroke="${detail}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${sym}</g><rect x="21" y="45" width="4" height="2" fill="${detail}" opacity=".8"/></svg>`}
+function drawEggs(){let layer=$('eggLayer');layer.innerHTML=species.map((s,i)=>`<button class="egg ${playableSpecies.includes(s.id)?'readyEgg':'lockedEgg'}" style="left:${s.pos[0]}%;top:${s.pos[1]}%" data-egg="${i}" aria-label="Inspect mystery egg ${i+1} near ${s.type.toLowerCase()} scenery" title="Mystery Egg ${i+1}">${eggSvg(s)}</button>`).join('');layer.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{const idx=Number(b.dataset.egg);pickEgg(idx);if(playableSpecies.includes(species[idx].id))splash('adopt')}))}
+function pickEgg(i){selected=i;let s=species[i];layerSelect();$('clueCard').innerHTML=`<strong>Egg ${String(i+1).padStart(2,'0')} · ${s.type} clue</strong><p>“${s.clue}”</p><div class="tip">${playableSpecies.includes(s.id)?'READY TO HATCH — tap the egg or use the green button below.':'SEALED PREVIEW — this creature is not hatchable yet. Try one of the ten glowing eggs.'}</div>`;$('adoptBtn').disabled=!playableSpecies.includes(s.id);$('adoptBtn').textContent=playableSpecies.includes(s.id)?'ADOPT THIS EGG':'NOT YET READY'}
+function layerSelect(){$('eggLayer').querySelectorAll('button').forEach((b,i)=>b.classList.toggle('selected',i===selected))}
+function splash(which){$('splash').classList.remove('hidden');$('nameWrap').classList.toggle('hidden',which!=='name');if(which==='adopt'){$('splashTitle').textContent='Take this mystery egg home?';$('splashDesc').textContent=species[selected].clue+' This egg is ready to hatch. Its true identity will be revealed when it hatches.';$('splashYes').textContent='Hatch this egg';$('splashYes').onclick=()=>splash('name')}else if(which==='name'){$('splashTitle').textContent='A '+species[selected].name+' hatched!';$('splashDesc').textContent='A unique little '+species[selected].type.toLowerCase()+' companion emerges from its egg. What will you call it?';$('splashYes').textContent='Welcome to my home!';$('splashYes').onclick=finishHatch;setTimeout(()=>$('nameInput').focus(),20)}}
+function finishHatch(){let n=$('nameInput').value.trim().replace(/[<>]/g,'').slice(0,18)||species[selected].name;if(roster.length>=3){$('splash').classList.add('hidden');notify('Sanctuary is full — three companions maximum');return}if(roster.length)persist();activeSlot=roster.length;pet=blank();pet.kind=species[selected].id;pet.habitat=species[selected].id==='ripplet'?'pond':species[selected].id==='cloudlet'?'meadow':species[selected].id==='cindlet'?'twilight':'forest';stageNames=stageNamesBySpecies[pet.kind];pet.name=n;roster.push(pet);pet.hatchedAt=Date.now();pet.lastActive=Date.now();pet.lastMessage='I wonder what we can discover together!';effect('hatch');discoveries[pet.kind]=true;unlockStickers();persist();$('splash').classList.add('hidden');startPet();notify('You discovered '+curName()+'!')}
+function startPet(){try{localStorage.setItem('naches-pocket-critters-discovered-v1','yes')}catch(e){}view='pet';$('meadowView').classList.add('hidden');$('petView').classList.remove('hidden');render()}
+function applyCare(type){if(!pet.name)return;if(pet.vacation){notify('Return from Vacation Mode before caregiving.');return}if(pet.asleep){notify('Your companion is sleeping. Wake it from the Care menu first.');return}if(pet.caretakerUntil>Date.now()){notify('The caretaker is looking after this companion.');return}let status='';let earned=false;const d=today();let used=pet.careActions?.[d]||[];if(used.includes(type)){pet.lastMessage='Already done today! Time to enjoy a little rest.';notify('Care already completed today');render();return}currentFocus();pet.focusCare=true;pet.careActions={[d]:[...used,type]};if(type==='feed'){pet.hunger=Math.min(100,pet.hunger+22);pet.joy=Math.min(100,pet.joy+4);status='Crunch, crunch! A balanced snack helps me grow.';moodPreview='excited'}if(type==='clean'){pet.clean=Math.min(100,pet.clean+35);pet.joy=Math.min(100,pet.joy+4);status='All clean! I feel wonderful again.';moodPreview='happy'}if(type==='play'){pet.joy=Math.min(100,pet.joy+23);pet.energy=Math.max(30,pet.energy-9);status='That was fun! I love moving around.';moodPreview='excited'}if(type==='rest'){pet.energy=Math.min(100,pet.energy+30);status='A good rest helps living things recover.';moodPreview='sleepy'}lastAction=type;lastActionTime=performance.now();if(type==='clean'){pet.mess=false;if(pet.illness&&pet.clean>55&&pet.energy>50)pet.illness=false}pet.lastMessage=status;effect(type==='feed'?'feed':type==='clean'?'clean':type==='play'?'play':'rest');earned=awardCareDay();persist();render();notify(earned?'Care day completed!':status);setTimeout(()=>{moodPreview='';render()},1400)}
+function advance(){let before=pet.stage;if(pet.stage<pet.maxStage){pet.stage=Math.min(pet.maxStage,pet.stage+1);pet.regressCount=Math.max(0,pet.maxStage-pet.stage)}else{for(let st=3;st<=6;st++)if(pet.careSessions>=stageThreshold[st]&&st>pet.maxStage){pet.maxStage=st;pet.stage=st;pet.seenStages=[...new Set([...(pet.seenStages||[]),st])]}}if(pet.stage!==before){effect('grow');pet.lastMessage=`A new chapter! ${pet.name} is now a ${stageNames[pet.stage]}!`;setTimeout(()=>notify(`Evolution: ${stageNames[pet.stage]}!`),100)}}
+const questions=[
+ {q:'A fern grows best in which environment?',a:['Moist, shaded woodland','Dry, bare desert','Frozen ocean ice'],correct:0,why:'Ferns often thrive in moist, shaded environments.'},
+ {q:'Which part of most plants absorbs water from soil?',a:['Flower petals','Roots','Seeds'],correct:1,why:'Roots take up water and dissolved minerals.'},
+ {q:'Why do many animals use camouflage?',a:['To blend into surroundings','To make storms','To change seasons'],correct:0,why:'Camouflage makes an animal harder to spot.'},
+ {q:'Which is an example of a living thing?',a:['A pebble','A fallen glass bead','A mushroom'],correct:2,why:'Mushrooms are fungi and are living organisms.'},
+ {q:'What do plants generally need for photosynthesis?',a:['Sunlight, water and carbon dioxide','Only soil','Only moonlight'],correct:0,why:'Photosynthesis uses light energy, water, and carbon dioxide.'},
+ {q:'Which helps protect forest soil from erosion?',a:['Removing every plant','Tree roots holding soil','Paving the forest'],correct:1,why:'Roots help anchor the soil and reduce erosion.'},
+ {q:'Why does an ecosystem need decomposers?',a:['To turn rain into stone','To recycle nutrients','To stop all plant growth'],correct:1,why:'Decomposers break down dead material, recycling nutrients.'},
+ {q:'Which description best fits an adaptation?',a:['A trait helping survival in an environment','A weather prediction','A type of map'],correct:0,why:'An adaptation is a characteristic that helps an organism survive or reproduce.'},
+ {q:'What is the main role of leaves in most plants?',a:['Absorbing sunlight for photosynthesis','Making rocks','Digging tunnels'],correct:0,why:'Leaves capture light and are major sites of photosynthesis.'},
+ {q:'Which animal is most likely to help spread seeds?',a:['A fox carrying burrs in its fur','A statue','A waterfall made of glass'],correct:0,why:'Seeds can cling to animal fur and travel to new areas.'},
+ {q:'What is a habitat?',a:['The natural home of an organism','A type of cloud','A rock measurement'],correct:0,why:'A habitat is the place an organism lives.'},
+ {q:'Which practice helps keep a stream healthy?',a:['Dumping trash into the stream','Keeping litter out of water','Removing all streamside plants'],correct:1,why:'Keeping litter out of water reduces pollution.'}
+];
+const scienceBySpecies={
+ petalhorn:[
+ {q:'Which flower part typically produces pollen?',a:['Anther','Root cap','Leaf blade'],correct:0,why:'The anther is part of the stamen and produces pollen.'},
+ {q:'Why might a brightly colored flower attract an insect?',a:['To help transfer pollen','To create rocks','To freeze the soil'],correct:0,why:'Many flowering plants attract pollinators that move pollen between flowers.'},
+ {q:'What can seeds develop into when conditions are suitable?',a:['New plants','Clouds','Minerals'],correct:0,why:'Seeds contain embryos that can grow into new plants.'},
+ {q:'What do a plant’s roots often absorb from soil?',a:['Water and dissolved minerals','Only sunlight','Only oxygen from leaves'],correct:0,why:'Roots absorb water and mineral nutrients dissolved in it.'},
+ {q:'What is one way wind helps flowering plants?',a:['It can carry pollen','It makes new petals from stone','It stops evaporation entirely'],correct:0,why:'Wind can transport pollen for wind-pollinated plants.'}
+ ],
+ ripplet:[
+ {q:'Which feature helps many aquatic animals move efficiently through water?',a:['A streamlined body','Heavy dry fur','Flat square sails on their skin'],correct:0,why:'A streamlined shape reduces drag as an animal swims.'},
+ {q:'Why are wetlands important?',a:['They provide habitat and help filter water','They prevent all flooding everywhere','They have no living organisms'],correct:0,why:'Wetlands support many species and can trap sediments and some pollutants.'},
+ {q:'How do most fish get oxygen from water?',a:['Through gills','Through feathers','Through roots'],correct:0,why:'Gills exchange dissolved oxygen with water.'},
+ {q:'What can happen when plastic trash enters streams?',a:['Animals may ingest it or become entangled','The water becomes permanently cleaner','Fish grow extra fins'],correct:0,why:'Plastic pollution can harm aquatic wildlife.'},
+ {q:'What is a tide?',a:['A regular rise and fall of sea level','A kind of freshwater plant','A daytime cloud type'],correct:0,why:'Tides are periodic changes in sea level, largely driven by lunar and solar gravity.'}
+ ],
+ cindlet:[
+ {q:'What three things are required for a typical fire to continue burning?',a:['Heat, fuel, and oxygen','Sand, ice, and shadows','Water, soil, and pollen'],correct:0,why:'The fire triangle consists of heat, fuel, and oxygen.'},
+ {q:'What should people do if they encounter an unattended campfire?',a:['Tell a responsible adult','Add dry leaves to it','Leave it burning for wildlife'],correct:0,why:'An unattended campfire can spread, and an adult should handle the hazard safely.'},
+ {q:'What does heat generally do to the speed of moving particles?',a:['Increases their average motion','Stops all particles','Turns every solid into fire'],correct:0,why:'Heating matter generally increases the average kinetic energy of its particles.'},
+ {q:'Why are volcanic rocks sometimes full of tiny holes?',a:['Gas bubbles were trapped in cooling lava','Birds carved every hole','The rock dissolved in moonlight'],correct:0,why:'Escaping gas bubbles can leave cavities as lava solidifies.'},
+ {q:'What is one ecosystem benefit that can occur after some wildfires?',a:['Some plants germinate in newly opened habitat','All animals instantly gain shelter','Soil becomes immune to erosion'],correct:0,why:'Some fire-adapted plants germinate or grow well after certain fires; wildfires can also cause serious damage.'}
+ ],
+ cloudlet:[
+ {q:'Which weather instrument measures wind speed?',a:['Anemometer','Thermometer','Rain gauge'],correct:0,why:'An anemometer measures wind speed.'},
+ {q:'What are clouds mostly made of?',a:['Tiny water droplets or ice crystals','Cotton fibers','Smoke alone'],correct:0,why:'Clouds consist primarily of tiny liquid water droplets, ice crystals, or both.'},
+ {q:'What causes wind?',a:['Differences in air pressure','Ocean salt crystals','The shadows of mountains'],correct:0,why:'Air moves due to pressure differences, which arise from uneven heating and other factors.'},
+ {q:'Which is a safe choice during a thunderstorm?',a:['Go inside a substantial building','Stand under the tallest isolated tree','Swim in an open lake'],correct:0,why:'A substantial enclosed building provides much better protection from lightning.'},
+ {q:'What happens to rising moist air when it cools enough?',a:['Water vapor can condense into droplets','All moisture disappears from Earth','It becomes solid rock'],correct:0,why:'Cooling air can reach saturation, allowing water vapor to condense.'}
+ ]
+};
+
+const extraQuestions=[{"q":"Which process lets plants convert sunlight into stored chemical energy?","a":["Photosynthesis","Respiration alone","Transpiration"],"correct":0,"why":"Photosynthesis uses light energy to make sugars from carbon dioxide and water."},{"q":"Which plant structure usually absorbs most water from soil?","a":["Roots","Petals","Pollen"],"correct":0,"why":"Roots absorb water and minerals from soil."},{"q":"What is a plant pollinator?","a":["An animal that transfers pollen","A mineral in soil","A type of rainstorm"],"correct":0,"why":"Pollinators can move pollen between flowers, helping many plants reproduce."},{"q":"Why do many seeds have wings or fluff?","a":["Wind can carry them away","They can fly under their own power","They grow without water"],"correct":0,"why":"Winged or fluffy seed structures help wind dispersal."},{"q":"What is a producer in a food web?","a":["An organism that makes its own food","An animal that eats only insects","An organism that never needs energy"],"correct":0,"why":"Producers such as plants typically make their own food using sunlight."},{"q":"Which organism is often a decomposer?","a":["Fungus","Deer","Eagle"],"correct":0,"why":"Many fungi break down dead organic material and recycle nutrients."},{"q":"What do herbivores primarily eat?","a":["Plants or algae","Other animals only","Rocks"],"correct":0,"why":"Herbivores obtain most of their food from plant or algal material."},{"q":"Why is biodiversity often helpful to ecosystems?","a":["Different species support many ecological roles","Every species eats the same food","All populations remain constant"],"correct":0,"why":"Biodiversity helps ecosystems support varied interactions and functions."},{"q":"What is an adaptation?","a":["An inherited trait that helps survival or reproduction","A temporary weather forecast","A tool used only by humans"],"correct":0,"why":"Adaptations are heritable characteristics shaped over generations."},{"q":"Why do many desert plants have thick stems?","a":["To store water","To catch fish","To prevent all photosynthesis"],"correct":0,"why":"Water-storing tissues help plants survive dry periods."},{"q":"What is camouflage?","a":["Color or pattern that helps an organism blend in","A change from solid to gas","An animal building a dam"],"correct":0,"why":"Camouflage can reduce detection by predators or prey."},{"q":"What does nocturnal mean?","a":["Mostly active at night","Only active underwater","Always asleep"],"correct":0,"why":"Nocturnal animals are primarily active during nighttime hours."},{"q":"Which animal group has a backbone?","a":["Vertebrates","Invertebrates","All insects"],"correct":0,"why":"Vertebrates are animals with backbones."},{"q":"Why can broad owl wings aid silent flight?","a":["Special feather structures reduce flight noise","They contain electric motors","Owls never move their wings"],"correct":0,"why":"Feather adaptations help many owls fly quietly."},{"q":"Why do arctic foxes grow thick fur?","a":["Insulation reduces heat loss","Fur creates extra sunlight","Fur keeps snow warm"],"correct":0,"why":"Thick fur traps air and helps animals retain body heat."},{"q":"Which is an example of a behavioral adaptation?","a":["Birds migrating seasonally","Having a thick shell","Having webbed feet"],"correct":0,"why":"Migration is behavior that can help animals access suitable seasonal resources."},{"q":"Why are wetland habitats important?","a":["They can filter water and provide wildlife habitat","They stop all floods completely","They contain no decomposers"],"correct":0,"why":"Wetlands support biodiversity and can filter pollutants and slow runoff."},{"q":"What is a food chain?","a":["A sequence showing how energy moves between organisms","A list of every mineral in soil","A list of clouds"],"correct":0,"why":"Food chains track energy transfer from one organism to another."},{"q":"What is the main energy source for most surface ecosystems?","a":["Sunlight","Moonlight","Earthquakes"],"correct":0,"why":"Photosynthesis captures solar energy that supports most food webs."},{"q":"What would likely happen if a pollinator population declined?","a":["Some plants could produce fewer seeds","All rivers would dry up","Earth would stop rotating"],"correct":0,"why":"Plants depending on those pollinators may have lower reproductive success."},{"q":"What is the water cycle?","a":["The continuous movement of water through Earth systems","A single rain event","The conversion of all oceans to ice"],"correct":0,"why":"Water circulates through evaporation, condensation, precipitation, and other processes."},{"q":"What causes evaporation?","a":["Liquid molecules escape into the gas phase","All water freezes instantly","Clouds turn into rocks"],"correct":0,"why":"During evaporation, some surface liquid molecules enter the air as vapor."},{"q":"What is condensation?","a":["Water vapor becomes liquid droplets","Ice becomes water vapor directly","A solid becomes plasma"],"correct":0,"why":"Condensation occurs when water vapor changes to liquid."},{"q":"Which type of cloud is often tall and associated with thunderstorms?","a":["Cumulonimbus","Cirrus only","Stratus only"],"correct":0,"why":"Cumulonimbus clouds can grow vertically and produce thunderstorms."},{"q":"What does a barometer measure?","a":["Air pressure","Wind direction","Rainfall amount"],"correct":0,"why":"A barometer measures atmospheric pressure."},{"q":"What does a rain gauge measure?","a":["Amount of precipitation","Air pressure","Sunrise time"],"correct":0,"why":"A rain gauge collects and measures liquid precipitation."},{"q":"What is humidity?","a":["How much water vapor is in the air","The speed of rocks sliding downhill","The amount of sand on a beach"],"correct":0,"why":"Humidity describes water vapor in air."},{"q":"Why can snow appear white?","a":["Ice crystals scatter many visible wavelengths","Snow absorbs all light","Snow generates white electricity"],"correct":0,"why":"Multiple light scattering by ice crystals makes most snow appear white."},{"q":"What produces thunder?","a":["Rapid air expansion around a lightning channel","Ocean waves alone","The movement of planets"],"correct":0,"why":"Lightning heats nearby air rapidly, producing an expanding pressure wave."},{"q":"What makes a sea breeze likely on a sunny afternoon?","a":["Land heats more rapidly than nearby water","Earth stops spinning at the coast","Clouds pull air toward shore"],"correct":0,"why":"Differential heating can create local pressure differences and an onshore breeze."},{"q":"What is the safest place when you hear thunder outdoors?","a":["Inside a substantial building","Under an isolated tree","On an open hilltop"],"correct":0,"why":"A substantial enclosed building offers protection from lightning."},{"q":"Which direction does gravity pull dropped objects near Earth?","a":["Toward Earth’s center","Toward the nearest cloud","Always east"],"correct":0,"why":"Gravity attracts objects toward Earth’s center of mass."},{"q":"What is friction?","a":["A force opposing motion between contacting surfaces","Energy created from nothing","A type of cloud"],"correct":0,"why":"Friction resists relative motion between surfaces."},{"q":"What is a renewable energy resource?","a":["A resource replenished on human timescales","A resource that can never run out under any use","Any underground metal"],"correct":0,"why":"Solar and wind energy are replenished naturally on human timescales."},{"q":"What is a conductor of electricity?","a":["A material that allows electric charge to move easily","A material that blocks all heat","A material that is always magnetic"],"correct":0,"why":"Conductors such as copper allow electric charges to move relatively easily."},{"q":"Which material is usually a good electrical insulator?","a":["Dry rubber","Copper wire","Aluminum foil"],"correct":0,"why":"Dry rubber resists the flow of electric current."},{"q":"What is a complete electrical circuit?","a":["A closed path for current to flow","A wire with both ends disconnected","A path made only of wood"],"correct":0,"why":"Current flows when there is a closed conducting path and a suitable source."},{"q":"What is a magnet’s north pole attracted to?","a":["The south pole of another magnet","The north pole of another magnet","Every piece of plastic"],"correct":0,"why":"Opposite magnetic poles attract each other."},{"q":"What happens when light enters water from air at an angle?","a":["It usually bends due to refraction","It always disappears","It becomes sound"],"correct":0,"why":"Refraction changes the direction of light when its speed changes between media."},{"q":"What is a transparent material?","a":["One that lets light pass through with little scattering","One that reflects every wavelength","One that is always blue"],"correct":0,"why":"Transparent materials transmit light so objects can generally be seen through them."},{"q":"Why do we hear echoes?","a":["Sound waves reflect from surfaces","Light turns into rocks","Wind freezes in place"],"correct":0,"why":"An echo is reflected sound arriving after the original sound."},{"q":"Which property distinguishes mass from weight?","a":["Mass measures matter; weight is gravitational force","Mass changes whenever you climb stairs","Weight is measured in liters"],"correct":0,"why":"Mass is an intrinsic quantity; weight depends on gravity."},{"q":"What is the unit of force in the SI system?","a":["Newton","Liter","Degree Celsius"],"correct":0,"why":"Force is measured in newtons in the SI system."},{"q":"Why does a thrown ball slow as it rises?","a":["Gravity accelerates it downward","The air contains no energy","Its mass suddenly vanishes"],"correct":0,"why":"Gravity changes the ball’s upward velocity as it rises."},{"q":"What causes a shadow?","a":["An object blocks some incoming light","An object produces extra darkness","Air always absorbs light at night"],"correct":0,"why":"Shadows occur when opaque objects obstruct light."},{"q":"How is a solid different from a liquid?","a":["A solid keeps its shape without a container","Every solid is harder than steel","Liquids contain no particles"],"correct":0,"why":"Solids generally maintain shape, while liquids flow to fit containers."},{"q":"What happens to most substances when they melt?","a":["A solid becomes liquid","Liquid becomes gas directly","Gas becomes solid"],"correct":0,"why":"Melting is the transition from solid to liquid."},{"q":"What is freezing?","a":["A liquid changing into a solid","A gas changing to plasma","A solid changing to liquid"],"correct":0,"why":"Freezing is the transition from liquid to solid."},{"q":"What is density?","a":["Mass per unit volume","Total length of an object","Temperature multiplied by time"],"correct":0,"why":"Density expresses how much mass occupies a given volume."},{"q":"Why can a steel ship float?","a":["Its overall average density with enclosed air is lower than water","Steel loses all mass in water","Ocean waves hold it up without buoyancy"],"correct":0,"why":"A ship displaces water; buoyancy supports it when the ship’s average density is low enough."},{"q":"What is a physical change?","a":["A change in form without forming a new substance","A change that always creates a new element","Any change involving an organism"],"correct":0,"why":"Melting and breaking change physical form but not chemical identity."},{"q":"Which is a chemical change?","a":["Iron rusting","Ice melting","Paper being cut"],"correct":0,"why":"Rusting forms new substances through a chemical reaction."},{"q":"What is a mixture?","a":["A combination of substances not chemically bonded into one new substance","A pure element only","A single type of molecule"],"correct":0,"why":"Mixtures contain physically combined materials."},{"q":"How can dissolved salt be recovered from saltwater?","a":["Evaporate the water","Remove salt with a kitchen sieve","Freeze the salt into rocks"],"correct":0,"why":"Evaporation removes the water and leaves salt behind."},{"q":"What is an atom?","a":["A basic unit of an element","A kind of weather front","A very small animal"],"correct":0,"why":"Atoms are the basic units of chemical elements."},{"q":"Which gas makes up most of Earth’s atmosphere?","a":["Nitrogen","Oxygen","Carbon dioxide"],"correct":0,"why":"Nitrogen makes up about 78 percent of dry air."},{"q":"What gas do humans need to breathe for cellular respiration?","a":["Oxygen","Helium","Methane"],"correct":0,"why":"Cells use oxygen for aerobic respiration."},{"q":"Why are helmets useful in biking?","a":["They can reduce the risk of head injury","They make bicycles completely crash-proof","They eliminate the need to watch traffic"],"correct":0,"why":"Properly fitted helmets reduce risk of some head injuries."},{"q":"What is one safe way to handle a suspected electrical wire hazard?","a":["Keep away and alert a responsible adult","Touch it to see if it is warm","Cover it with wet paper"],"correct":0,"why":"Electricity hazards require avoiding contact and seeking trained help."},{"q":"Why should hands be washed with soap?","a":["Soap helps remove microbes and oils","Soap makes skin immune to every disease","Soap stops all bacteria from existing"],"correct":0,"why":"Soap helps loosen and remove germs and material from skin."},{"q":"What makes a balanced meal helpful?","a":["It supplies several kinds of essential nutrients","It guarantees nobody will ever be sick","It only contains one food group"],"correct":0,"why":"Varied nutritious food helps meet the body’s different nutritional needs."},{"q":"Why does sleep matter for learning?","a":["Sleep supports memory and attention","Sleep permanently replaces studying","Sleep turns food directly into oxygen"],"correct":0,"why":"Sleep contributes to memory consolidation and cognitive functioning."},{"q":"What is dehydration?","a":["Not having enough body water","Having too much oxygen in the air","Having a full stomach"],"correct":0,"why":"Dehydration occurs when the body loses more fluid than it replaces."},{"q":"Why is drinking clean water important?","a":["It supports body functions and reduces infection risk","It prevents all illnesses","It completely replaces food"],"correct":0,"why":"Safe water supports hydration without exposing people to many waterborne germs."},{"q":"How does a vaccine generally help the immune system?","a":["It trains immune defenses to recognize a target","It makes all germs disappear instantly","It replaces the need for sleep"],"correct":0,"why":"Vaccination can prime immune responses to particular pathogens."},{"q":"Which is a sign that food may be unsafe to eat?","a":["Visible mold on a food that should not be moldy","A properly sealed package","A clear ingredients label"],"correct":0,"why":"Unexpected mold can be a sign of spoilage; ask an adult before eating suspect food."},{"q":"Why does exercise increase breathing rate?","a":["Working muscles need more oxygen and produce more carbon dioxide","Exercise removes all air from lungs","Muscles stop using energy"],"correct":0,"why":"Ventilation increases to help supply oxygen and remove carbon dioxide."},{"q":"What is an ecosystem?","a":["Living things interacting with one another and their environment","Only the rocks in a mountain","Only the weather in one town"],"correct":0,"why":"Ecosystems include organisms and their physical surroundings."},{"q":"What is erosion?","a":["Movement of soil or rock by water, wind, ice, or gravity","Formation of new stars","A type of photosynthesis"],"correct":0,"why":"Erosion transports weathered material from one location to another."},{"q":"What is weathering?","a":["Breaking down rocks at or near Earth’s surface","The movement of Earth around the Sun","Only rain falling from clouds"],"correct":0,"why":"Weathering breaks down rock through physical, chemical, or biological processes."},{"q":"What is sediment?","a":["Loose particles of rock or other material","Liquid metal from Earth’s core","Pure sunlight"],"correct":0,"why":"Sediment consists of small fragments transported or deposited by agents such as water."},{"q":"Which rocks form as magma or lava cools?","a":["Igneous rocks","Sedimentary rocks only","Metamorphic rocks only"],"correct":0,"why":"Igneous rocks crystallize as molten rock cools."},{"q":"How can sedimentary rock form?","a":["Sediments become compacted and cemented","Stars freeze into crystals","Trees turn directly into marble"],"correct":0,"why":"Many sedimentary rocks form when layers of sediment compact and cement."},{"q":"What makes metamorphic rocks change?","a":["Heat and pressure without complete melting","Only ocean salt","Only moonlight"],"correct":0,"why":"Metamorphism changes minerals and texture through heat, pressure, and fluids."},{"q":"What is the crust of Earth?","a":["The outermost solid layer","The liquid center","The atmosphere around Earth"],"correct":0,"why":"The crust is Earth’s outermost solid shell."},{"q":"Why do earthquakes often occur at plate boundaries?","a":["Moving plates build up and release stress","Clouds push down on the ground","The Moon switches off gravity"],"correct":0,"why":"Tectonic plates interact and accumulated stress may be released in earthquakes."},{"q":"What is magma?","a":["Molten rock beneath Earth’s surface","Frozen water in glaciers","Salt dissolved in seawater"],"correct":0,"why":"Magma is molten or partially molten rock underground."},{"q":"Why do some volcanoes erupt?","a":["Pressure from gas and magma can drive material upward","Only wind pushes lava out","The ocean pulls magma into clouds"],"correct":0,"why":"Gas pressure and magma movement can cause volcanic eruptions."},{"q":"How do mountains sometimes form?","a":["Tectonic plates collide and uplift rocks","Rain instantly piles all rocks into peaks","Plants create mountain cores overnight"],"correct":0,"why":"Plate motion can compress and lift Earth’s crust."},{"q":"What causes ocean waves in most everyday situations?","a":["Wind transfers energy to the water","Fish swim in circles","The ocean floor is always moving"],"correct":0,"why":"Wind drives most surface waves people see at beaches."},{"q":"What is a watershed?","a":["An area draining to a common body of water","A device that measures humidity","A place without any rivers"],"correct":0,"why":"Water falling in a watershed drains toward a shared outlet."},{"q":"Why can trees help slow soil erosion?","a":["Roots help hold soil and foliage reduces rainfall impact","Trees eliminate gravity","Leaves instantly turn all soil to stone"],"correct":0,"why":"Roots stabilize soil and vegetation helps reduce erosion."},{"q":"What can cause a river to flood?","a":["More water arrives than its channel can hold","Every river freezes at noon","The river stops flowing permanently"],"correct":0,"why":"Flooding happens when river flow exceeds channel capacity."},{"q":"What is a habitat?","a":["The place where an organism lives","The number of stars in a galaxy","An instrument used for hearing"],"correct":0,"why":"A habitat supplies the conditions and resources an organism needs."},{"q":"What is a population in ecology?","a":["Members of one species living in an area","All nonliving materials in an ecosystem","Every organism on Earth together"],"correct":0,"why":"A population is a group of organisms of one species in an area."},{"q":"What is competition in ecology?","a":["Organisms seeking a resource that is limited","Every animal being a predator","A plant doing photosynthesis"],"correct":0,"why":"Organisms compete when they need overlapping limited resources."},{"q":"What is mutualism?","a":["An interaction benefiting both species","An interaction always harming both species","An interaction between rocks only"],"correct":0,"why":"In mutualism, two different species each gain a benefit."},{"q":"What is a predator?","a":["An organism that hunts and consumes prey","A plant that produces seeds","Any animal that sleeps at night"],"correct":0,"why":"Predators obtain food by capturing and eating other organisms."},{"q":"What is a scavenger?","a":["An animal that eats dead organisms it did not kill","An animal that can only eat leaves","An organism that makes rocks"],"correct":0,"why":"Scavengers feed on carcasses without having killed the animal."},{"q":"What is the role of fungi in many forests?","a":["Recycling nutrients from decaying material","Producing all sunlight in the forest","Controlling the movement of the Moon"],"correct":0,"why":"Decomposer fungi help return nutrients to ecosystems."},{"q":"How do spores differ from seeds?","a":["Many spores are single reproductive cells without stored food for an embryo","Every spore grows into a tree","Spores are always larger than seeds"],"correct":0,"why":"Spores typically differ from seeds in structure and development."},{"q":"Why might a mushroom appear after rain?","a":["Moist conditions favor fruiting in many fungi","Rain makes all rocks become mushrooms","Rain turns sunlight into spores"],"correct":0,"why":"Moisture can trigger mushroom fruiting in some fungi."},{"q":"What is mycelium?","a":["A network of fungal filaments","A kind of flower petal","A layer of Earth’s atmosphere"],"correct":0,"why":"Mycelium is a mass of threadlike fungal hyphae."},{"q":"What is symbiosis?","a":["A close interaction between different species","Every animal hibernating at once","Only plants using sunlight"],"correct":0,"why":"Symbiosis refers to close relationships between organisms of different species."},{"q":"What is a lichen?","a":["A partnership involving a fungus and a photosynthetic partner","A kind of mineral","A baby bird"],"correct":0,"why":"Lichens generally involve fungi living with algae or cyanobacteria."},{"q":"How do bats locate small flying insects in darkness?","a":["Many species use echolocation","All species use only smell","Bats emit sunlight"],"correct":0,"why":"Many insect-eating bats use echoes from emitted sounds to locate prey."},{"q":"Are bats mammals?","a":["Yes, they have traits such as fur and nursing young","No, all flying animals are birds","No, bats are insects"],"correct":0,"why":"Bats are mammals despite being able to fly."},{"q":"What is a constellation?","a":["An officially defined region or recognizable pattern of stars","A planet with rings","A kind of weather front"],"correct":0,"why":"Constellations are recognized patterns and defined regions of the sky."},{"q":"Why does the Moon appear to change shape?","a":["We see different amounts of its sunlit half","It shrinks and grows each week","Earth turns it into a new planet"],"correct":0,"why":"Moon phases result from our viewing angle of the sunlit portion."},{"q":"What causes day and night on Earth?","a":["Earth rotating on its axis","The Moon blocking the Sun each night","Clouds orbiting the equator"],"correct":0,"why":"Earth’s rotation causes different areas to face toward or away from the Sun."},{"q":"What causes Earth’s seasons?","a":["Earth’s tilted axis as it orbits the Sun","Changes in the Sun’s distance alone","The Moon changing size"],"correct":0,"why":"Axial tilt changes sunlight angle and day length over the year."},{"q":"What is a light-year?","a":["The distance light travels in one year","One hour of sunlight","The time Earth takes to rotate"],"correct":0,"why":"A light-year is a unit of distance, not time."},{"q":"Which planet is known for its prominent ring system?","a":["Saturn","Mercury","Venus"],"correct":0,"why":"Saturn has a prominent ring system made of ice, rock, and dust."},{"q":"What is the Sun?","a":["A star","A moon","A rocky planet"],"correct":0,"why":"The Sun is the star at the center of our solar system."},{"q":"Why do stars appear to twinkle from Earth?","a":["Turbulence in the atmosphere bends incoming light","Stars turn off and on every second","The Moon flashes them"],"correct":0,"why":"Atmospheric turbulence causes rapid apparent changes in starlight."},{"q":"What is the Milky Way?","a":["The galaxy containing our solar system","A planet beyond Neptune","A kind of cloud"],"correct":0,"why":"The Milky Way is our home galaxy."},{"q":"What is the main cause of tides on Earth?","a":["Gravitational forces of the Moon and Sun","Wind alone","Ocean animals swimming"],"correct":0,"why":"Lunar and solar gravity are the main drivers of tides."}];
+let questionHistory=[];try{questionHistory=JSON.parse(localStorage.getItem(QUESTION_HISTORY)||'[]')||[]}catch(e){}
+function openQuiz(mode){
+ if(!pet.name||pet.vacation||pet.asleep||pet.caretakerUntil>Date.now())return;
+ const rewardEligible=(mode==='learn'?pet.lastLearnDay:pet.lastExploreDay)!==today();
+ // Practice remains available after the daily growth reward; more time gives no extra growth.
+ const bank=[...questions,...extraQuestions,...(scienceBySpecies[pet.kind]||[])];
+ let seen=new Set(questionHistory);let candidates=bank.filter(q=>!seen.has(q.q));
+ if(!candidates.length){questionHistory=[];seen.clear();candidates=bank;}
+ const original=candidates[Math.floor(Math.random()*candidates.length)];
+ questionHistory.push(original.q);if(questionHistory.length>bank.length)questionHistory=questionHistory.slice(-bank.length);
+ try{localStorage.setItem(QUESTION_HISTORY,JSON.stringify(questionHistory))}catch(e){}
+ let order=original.a.map((_,i)=>i);for(let i=order.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}
+ let item={...original,a:order.map(i=>original.a[i]),correct:order.indexOf(original.correct)};
+ quiz={mode,item,answered:false,chosen:-1,rewardEligible};quizChoice=0;panel='quiz';render()
+}
+function answerQuiz(n){if(!quiz||quiz.answered)return;
+ quiz.answered=true;quiz.chosen=n;const correct=n===quiz.item.correct;effect(correct?'right':'wrong');
+ if(quiz.rewardEligible){if(correct)pet.correct++;else pet.wrong++;
+ if(quiz.mode==='learn'){pet.lastLearnDay=today();pet.learned++;if(correct)pet.joy=Math.min(100,pet.joy+8)}
+ else{pet.lastExploreDay=today();pet.explored++;if(correct)pet.energy=Math.min(100,pet.energy+5)}
+ currentFocus();pet.focusLearn=true;unlockStickers();}
+ pet.lastActive=Date.now();pet.lastMessage=correct?'That discovery was fascinating!':'We can learn from every try.';
+ persist();awardCareDay();render()
+}
+const actions=[['🍎','Feed','feed'],['🫧','Clean','clean'],['🎲','Play','play'],['☁','Rest','rest'],['✦','Learn','learn'],['🌲','Explore','explore'],['📖','Journal','journal'],['◈','Habitat','habitat'],['⚙','Options','options']];
+function render(){if(view!=='pet')return;
+ // Migrate a sleeping companion from older releases without inventing past rest time.
+ if(pet.asleep&&!pet.sleepStartedAt&&!pet.vacation&&!(pet.caretakerUntil>Date.now())){pet.sleepStartedAt=Date.now();persist();}
+ const pc=$('previewControls');if(pc){
+ const inPreview=panel==='showcase',kind=galleryKind||pet.kind;
+ pc.classList.toggle('hidden',!inPreview);
+ if(inPreview){
+ const idx=playableSpecies.indexOf(kind),name=species.find(x=>x.id===kind)?.name||kind,form=(stageNamesBySpecies[kind]||stageNames)[galleryStage]||`Stage ${galleryStage}`;
+ const nav=`<div class="previewNav"><button data-previewstep="species:-1" title="Previous preview species">◀ Species</button><strong>PREVIEW ${name.toUpperCase()}<br>(${idx+1} / ${playableSpecies.length})</strong><button data-previewstep="species:1" title="Next preview species">Species ▶</button></div><div class="previewNav"><button data-previewstep="stage:-1" title="Previous growth stage">◀ Stage</button><strong>${form}<br>STAGE ${galleryStage} / 6</strong><button data-previewstep="stage:1" title="Next growth stage">Stage ▶</button></div>`;
+ const frameButtons=animatedSpecies.includes(kind)?teacherAnimations.map(a=>`<button data-animation="${a}" class="${galleryAction===a?'selected':''}" title="Preview ${a} animation without changing your pet">${a.toUpperCase()}</button>`).join('')+'<div id="assetCheck" class="assetCheck">Checking illustrated frames…</div>':'<div class="assetCheck">Full animation previews are available for five species.</div>';
+ pc.innerHTML=nav+frameButtons+'<button data-backgallery>↩ Gallery</button><button data-stopdemo>✕ Exit test</button>';
+ }else pc.innerHTML='';
+ }
+unlockStickers();updateStickers();$('device').className='device '+(pet.shell||'mint');$('petName').textContent=panel==='showcase'?((species.find(s=>s.id===(galleryKind||pet.kind))?.name||'Creature')+' · PREVIEW'):pet.name;
+ $('stageName').textContent=panel==='showcase'?((stageNamesBySpecies[galleryKind||pet.kind]||stageNames)[galleryStage]):stageNames[pet.stage];
+ $('sessionMark').textContent=panel==='showcase'?'TEST MODE':(pet.vacation?'REST':'DAY '+Math.max(1,Math.ceil((Date.now()-pet.hatchedAt)/DAY)));$('meters').innerHTML=[['Food',pet.hunger,'#b8a85e'],['Joy',pet.joy,'#e88f9e'],['Energy',pet.energy,'#84b7c8'],['Clean',pet.clean,'#7bbba3']].map(([k,v,c])=>`<div><label>${k} ${Math.round(v)}%</label><div class="meter"><i style="width:${v}%;background:${c}"></i></div></div>`).join('');$('speech').classList.toggle('gallerySpeech',panel==='showcase');
+ $('speech').textContent=panel==='showcase'?`TEACHER PREVIEW — ${(stageNamesBySpecies[galleryKind||pet.kind]||stageNames)[galleryStage]} · ${galleryAction.toUpperCase()} · your saved pet remains ${pet.name}`:(pet.lastMessage||'A happy home is full of care.');$('toolbar').innerHTML=actions.slice(0,6).map(([sym,label,act],i)=>`<button class="tool ${tabIndex===i?'active':''}" data-act="${act}" ${(pet.vacation||pet.asleep||pet.caretakerUntil>Date.now())&&['feed','clean','play','rest','learn','explore'].includes(act)?'disabled':''}><span class="symbol">${sym}</span>${label}</button>`).join('');let m=$('modal');m.classList.toggle('hidden',!panel||panel==='showcase');if(panel==='journal'){m.innerHTML=`<h2>✧ Creature Journal</h2><p><strong>${pet.name}</strong> · Species: ${curName()} · ${curType()} family</p><p>Stage ${pet.stage}/6 · Highest stage ${pet.maxStage}/6 · Care days ${pet.careSessions}</p><div class="qaProgress">${pet.maxStage>=6?'All six forms discovered!':pet.stage<pet.maxStage?'Care sessions will restore previously unlocked forms.':'Next evolution in '+daysUntilNext()+' completed care day'+(daysUntilNext()===1?'':'s')+'.'} Each day requires care, a discovery, and four minutes of active play. The game grants at most one growth day per calendar day.</div><div class="qaProgress">${pet.maxStage===6?"Mythic evolution reached!":pet.stage<pet.maxStage?"Recovery: complete a care day to restore the next previously reached form.":'Keep caring to discover your next evolution.'} Growth is earned through a complete care session, once per day.</div><div class="note">Ten species are playable. Five use illustrated artwork, and Frostell has individually illustrated poses; Sporekin, Pebblot, Moonbat, and Voltwing now have art-based pose variations. More eggs will hatch in future builds.</div><p><strong>Evolution record</strong></p>${stageNames.slice(2).map((s,i)=>`<span class="tag">${pet.maxStage>=i+2?'◆ '+s:'? ? ?'}</span>`).join('')}<p>Correct science answers: ${pet.correct} · Explorations: ${pet.explored} · Study sessions: ${pet.learned}</p><p><strong>Meadow discoveries</strong> · ${Object.keys(discoveries).filter(k=>discoveries[k]).length}/20 species identified</p><p>Species discoveries: ${species.map(s=>discoveries[s.id]?s.name:'???').join(' · ')}</p><button data-close>Back to my pet</button>`}
+else if(panel==='care'){
+ const sleeping=pet.asleep&&!(pet.caretakerUntil>Date.now());
+ const r=sleeping?sleepInfo():null;
+ const summary=sleeping?`<div class="sleepSummary"><strong>☾ Sleep tracker · <span id="careSleepRemaining">${r.remaining}</span></strong><br><span id="careSleepSpent">${Math.floor(r.spent/60)}h ${String(r.spent%60).padStart(2,'0')}m</span> / 8h rested · Energy recovery <span id="careSleepEnergy">+${r.energy}</span> if awakened now.<br>Waking early has no extra penalty; it simply earns less rest.</div>`:'';
+ m.innerHTML=`<h2>♡ Care for ${pet.name.replace(/[&<>"']/g,'')}</h2><p>${pet.illness?'Needs the Critter Clinic':pet.mess?'Habitat needs cleaning':pet.asleep?'Sleeping peacefully':'Awake and comfortable'}</p>${summary}
+<button data-bed ${pet.caretakerUntil>Date.now()?'disabled':''}>${pet.asleep?'☀ Wake gently':'☾ Tuck in · 8-hour rest goal'}</button>
+<div class="choiceGrid"><button data-bath ${!pet.mess?'disabled':''}>🫧 ${pet.mess?'Clean up mess':'Habitat tidy ✓'}</button><button data-clinic ${!pet.illness?'disabled':''}>✚ ${pet.illness?'Visit clinic':'Healthy ✓'}</button><button data-comfort ${pet.lastComfortDay===today()||pet.asleep||pet.vacation||pet.caretakerUntil>Date.now()?'disabled':''}>♡ ${pet.lastComfortDay===today()?'Comforted today ✓':'Comfort'}</button><button data-vac>${pet.vacation?'End Vacation':'Vacation Mode'}</button></div>
+<p><strong>Caretaker:</strong> choose coverage for time away.</p><div class="choiceGrid"><button data-caretaker="3">3 days</button><button data-caretaker="7">7 days</button><button data-caretaker="21">21 days</button>${pet.caretakerUntil>Date.now()?'<button data-endcaretaker>Return home</button>':''}</div>
+<p class="mini">Sleeping pauses active care-time progress. The 8-hour timer continues while this browser is closed. Sanctuary and caretaker pets remain protected.</p><button data-close>Return to pet</button>`}
+
+else if(panel==='sanctuary'){m.innerHTML=`<h2>⌂ Creature Sanctuary</h2><p>Keep up to three companions. Only your active pet needs care; others rest safely and keep their evolution progress.</p>${roster.map((r,i)=>`<button data-switchpet="${i}" class="${i===activeSlot?'selected':''}">${i===activeSlot?'◆ ACTIVE — ':''}${r.name.replace(/[&<>"']/g,'')} · ${species.find(x=>x.id===r.kind)?.name||'Companion'} · Stage ${r.stage}/6 ${i===activeSlot?'':' · Tap to switch'}</button>`).join('')}${roster.length<3?'<button data-joinegg>＋ Adopt another mystery egg</button>':'<p>All three spaces are occupied.</p>'}<p class="mini">Resting companions do not become sick, lose energy, or regress. Switching does not earn extra daily growth.</p><button data-close>Return to pet</button>`}
+else if(panel==='habitat'){m.innerHTML=`<h2>◈ Choose a Habitat</h2><p>Your companion enjoys exploring comfortable places. Decorative habitats change the surroundings but never force an evolution.</p>${[['forest','Forest Glade'],['meadow','Sunny Meadow'],['twilight','Twilight Grove'],['pond','Pond Edge']].map(([k,n])=>`<button data-hab="${k}" class="${pet.habitat===k?'selected':''}">${n}${pet.habitat===k?' ✓':''}</button>`).join('')}<button data-close>Return</button>`}
+else if(panel==='options'){m.innerHTML=`<h2>⚙ Handheld Options</h2><p>Shell color:</p><div class="choiceGrid">${[['mint','Mint'],['blue','Blue'],['gold','Gold'],['violet','Violet']].map(([k,n])=>`<button class="${pet.shell===k?'selected':''}" data-shell="${k}">${n}</button>`).join('')}</div><button class="soundToggle" data-sound>Sound: ${sound?'ON':'OFF'} · Tap to ${sound?'mute':'enable'} retro effects</button><button data-vac>${pet.vacation?'Wake from Vacation Mode':'Enable Vacation Mode'}</button><p class="mini">Vacation Mode freezes inactivity changes. No creature death or school-day attendance streaks.</p><button data-stickers>🏅 Achievement Stickers · Decorate case</button><button data-demo-frostell>✦ TEST ANIMATED SPECIES — instant preview</button><button data-demo>Creature Test Gallery · Preview species and stages</button><button data-sanctuary>⌂ My Creature Sanctuary · ${roster.length}/3</button><button data-passport>▣ Pet Passport · Save or restore pets</button><button data-mini="pet">Mini Companion · With pet</button><button data-mini="status">Mini Status · Small indicators only</button><button data-close>Return</button>`}
+else if(panel==='passport'){m.innerHTML=`<h2>▣ My Pet Passport</h2><p>Take your pets to another Chromebook or computer. Your Passport includes all ${roster.length} companion${roster.length===1?'':'s'}, their names, growth, care progress, and Sanctuary collection.</p><button data-exportpassport>⬇ Save Pet Passport file</button><button data-importpassport>⬆ Restore from a Passport file</button><div class="passportHint"><b>Keep your latest backup.</b> Transfer the downloaded .json file to your school-approved storage. This does not automatically sync across devices. Import replaces this browser's current Pocket Critters pets. Download a backup first if you already have pets here.</div><button data-close>Return to my pet</button>`}
+else if(panel==='showcase'){m.innerHTML=''}
+else if(panel==='stickers'){const opts=unlockStickers();m.innerHTML=`<h2>🏅 Achievement Stickers</h2><p>Earn stickers through discoveries, caring, learning, exploring, and evolving. Choose up to three for your handheld shell.</p>${opts.map(([id,icon,name,earned])=>`<button data-sticker="${id}" ${!earned?'disabled':''} class="${(pet.placedStickers||[]).includes(id)?'selected':''}">${earned?icon:'🔒'} ${earned?name:'??? — undiscovered'} ${(pet.placedStickers||[]).includes(id)?'✓ on case':''}</button>`).join('')}<p class="mini">Stickers are cosmetic and never increase growth or game rewards.</p><button data-clearstickers>Remove case stickers</button><button data-close>Return to my pet</button>`}
+else if(panel==='gallery'){m.innerHTML=`<h2>✦ Teacher & Animation Gallery</h2><div class="qaExplainer">Preview without changing your saved companions. Select any species and evolution; Frostell has fully illustrated poses; four additional creatures have distinct art-based animated variations. The header will show PREVIEW and TEST MODE so you know you are not changing your actual pet.</div><p><strong>Species:</strong></p><div class="qaSpecies">${playableSpecies.map(id=>`<button data-previewkind="${id}" class="${(galleryKind||pet.kind)===id?'selected':''}">${species.find(s=>s.id===id).name}</button>`).join('')}</div><p><strong>Development:</strong> ${pet.careSessions} care days recorded. ${pet.maxStage===6?'Final stage achieved.':'The next form is still a mystery.'}</p><div class="galleryStages">${(stageNamesBySpecies[galleryKind||pet.kind]||stageNames).slice(1).map((n,i)=>`<button data-stage="${i+1}" class="${galleryStage===i+1?'selected':''}">${i+1}. ${n}</button>`).join('')}</div><p>Mood and care condition:</p>${moodOptions.map(s=>`<button data-mood="${s}" class="${moodPreview===s?'selected':''}">${s.charAt(0).toUpperCase()+s.slice(1)}</button>`).join('')}<button data-stopdemo>Return to my pet</button>`}
+else if(panel==='quiz'&&quiz){m.innerHTML=`<h2>${quiz.mode==='learn'?'✦ Creature Science':'✦ Habitat Expedition'}</h2><p>${quiz.item.q}</p>${quiz.item.a.map((s,i)=>`<button data-answer="${i}" ${quiz.answered?'disabled':''} class="${quizChoice===i?'selected':''}">${i+1}. ${s}</button>`).join('')}${quiz.answered?`<div class="note"><strong>${quiz.chosen===quiz.item.correct?'Correct!':'Good attempt.'}</strong><p>${quiz.item.why}</p></div><button data-closequiz>Return to pet</button>`:'<p class="mini">Use A/D and B, or click.</p>'}`}
+else if(panel==='confirmReset'){m.innerHTML='<h2>Adopt a new friend?</h2><p>Your existing companion will rest safely in the Sanctuary. You can keep up to three pets.</p><button data-joinegg>Visit the meadow</button><button data-close>Cancel</button>'}
+if(panel&&panel!=='showcase'){
+  const navButton=m.querySelector('button[data-close], button[data-stopdemo], button[data-closequiz]');
+  if(!navButton&&panel==='quiz'&&!quiz?.answered){m.insertAdjacentHTML('beforeend','<button data-close>Exit practice</button>');}
+  const target=navButton||m.querySelector('button[data-close]');
+  const body=document.createElement('div');body.className='modalBody';
+  while(m.firstChild)body.appendChild(m.firstChild);
+  m.appendChild(body);
+  if(target){const footer=document.createElement('div');footer.className='modalNav';footer.appendChild(target);m.appendChild(footer)}
+  else if(panel==='quiz'){
+   const footer=document.createElement('div');footer.className='modalNav';
+   footer.innerHTML='<button data-close>Exit practice</button>';m.appendChild(footer);
+  }
+ }
+ refreshSleepDisplay();refreshCareTracker();
+ let html=panel==='showcase'?`ART PREVIEW: ${(stageNamesBySpecies[galleryKind||pet.kind]||stageNames)[galleryStage]} · ${moodPreview||'happy'} · A/D stages, M mood, T action, B back`:panel==='gallery'?'Art preview · no progress changes':pet.vacation?'Vacation Mode · Your critter is resting':isCareDay()?'Today’s care is complete — keep an eye out for new forms':'Spend meaningful time caring and learning to earn growth';$('liveBanner').textContent=html;$('liveBanner').classList.add('hidden');}
+let galleryStage=2, galleryKind='', galleryAction='auto';
+const teacherAnimations=['auto','idle','walk','eat','sleep','play','clean','happy','angry','dirty','sick'];
+function selectAction(a){if(a==='journal'||a==='habitat'||a==='options'||a==='sanctuary'||a==='care'){panel=a;render();return}if(a==='learn'||a==='explore'){effect('explore');if(pet.vacation||pet.asleep||pet.caretakerUntil>Date.now()){notify(pet.asleep?'Wake your companion before studying or exploring.':'Your companion is resting safely.');return}openQuiz(a);return}if(pet.vacation){notify('Wake your pet first');return}applyCare(a)}
+function closePanel(){panel='';moodPreview='';render()}
+function handler(e){let b=e.target.closest('button');if(!b)return;if(b.dataset.act){tabIndex=actions.findIndex(a=>a[2]===b.dataset.act);selectAction(b.dataset.act)}else if(b.hasAttribute('data-close'))closePanel();else if(b.dataset.hab){pet.habitat=b.dataset.hab;pet.lastMessage='A new place to relax and explore.';persist();render()}else if(b.dataset.shell){pet.shell=b.dataset.shell;persist();render()}else if(b.hasAttribute('data-sound')){sound=!sound;try{localStorage.setItem('pocketcritters_sound_v32',sound?'on':'off')}catch(e){}if(sound)effect('grow');render()}else if(b.hasAttribute('data-vac')){pet.vacation=!pet.vacation;pet.lastActive=Date.now();pet.lastMessage=pet.vacation?'See you when you return!':'Good to see you again!';persist();render()}else if(b.dataset.mini){openMini(b.dataset.mini)}else if(b.hasAttribute('data-bed')){toggleBedtime()}
+else if(b.hasAttribute('data-bath')){if(pet.mess){pet.mess=false;pet.clean=Math.min(100,pet.clean+18);pet.lastMessage='The habitat is tidy again!';effect('clean');persist()}render()}
+else if(b.hasAttribute('data-clinic')){if(pet.illness){pet.illness=false;pet.energy=Math.max(58,pet.energy);pet.clean=Math.max(55,pet.clean);pet.lastMessage='The clinic helped me feel better. Time for a good rest!';effect('right');persist()}render()}
+else if(b.hasAttribute('data-comfort')){
+ if(pet.lastComfortDay===today()||pet.asleep||pet.vacation||pet.caretakerUntil>Date.now()){notify('Comfort is available once per day while awake.');return}
+ pet.lastComfortDay=today();pet.joy=Math.min(100,pet.joy+5);pet.lastMessage='Thanks for listening! I feel a little better.';lastAction='play';lastActionTime=performance.now();effect('play');persist();render()}
+else if(b.dataset.caretaker){const days=Math.max(1,Math.min(21,Number(b.dataset.caretaker)||3));pet.caretakerUntil=Date.now()+days*DAY;pet.sleepStartedAt=0;pet.asleep=true;pet.lastActive=Date.now();pet.lastMessage='The caretaker will look after me while you are gone.';persist();render()}
+else if(b.hasAttribute('data-endcaretaker')){pet.caretakerUntil=0;pet.asleep=false;pet.sleepStartedAt=0;pet.lastActive=Date.now();pet.lastMessage='Welcome back!';persist();render()}
+else if(b.hasAttribute('data-passport')){panel='passport';render()}else if(b.hasAttribute('data-exportpassport')){exportPetPassport()}else if(b.hasAttribute('data-importpassport')){$('passportFileInput').click()}else if(b.hasAttribute('data-sanctuary')){panel='sanctuary';render()}else if(b.hasAttribute('data-newpet')){panel='sanctuary';render()}else if(b.dataset.switchpet!==undefined){switchCompanion(Number(b.dataset.switchpet))}else if(b.hasAttribute('data-joinegg')){if(roster.length>=3){notify('Sanctuary full');return}persist();panel='';view='meadow';selected=-1;$('petView').classList.add('hidden');$('meadowView').classList.remove('hidden');$('clueCard').innerHTML='<strong>Find your next companion</strong><p>Choose another glowing mystery egg.</p>';$('adoptBtn').disabled=true;layerSelect()}else if(b.hasAttribute('data-stickers')){panel='stickers';render()}else if(b.dataset.sticker){const id=b.dataset.sticker;if(!(pet.stickers||[]).includes(id))return;let x=[...(pet.placedStickers||[])];if(x.includes(id))x=x.filter(y=>y!==id);else{x.push(id);if(x.length>3)x.shift()}pet.placedStickers=x;persist();render()}else if(b.hasAttribute('data-clearstickers')){pet.placedStickers=[];persist();render()}else if(b.hasAttribute('data-demo-frostell')){panel='showcase';galleryStage=6;galleryKind='frostell';galleryAction='walk';moodPreview='happy';render()}
+ else if(b.hasAttribute('data-demo')){panel='gallery';galleryStage=pet.stage;galleryKind=pet.kind;galleryAction='auto';moodPreview='happy';render()}else if(b.dataset.previewkind){galleryKind=b.dataset.previewkind;galleryStage=2;galleryAction='auto';render()}else if(b.dataset.stage){galleryStage=Number(b.dataset.stage);galleryAction='auto';panel='showcase';render()}else if(b.dataset.mood){moodPreview=b.dataset.mood;render()}else if(b.dataset.previewstep){const [what,dir]=b.dataset.previewstep.split(':');const d=Number(dir)||0;
+ if(what==='species'){const idx=playableSpecies.indexOf(galleryKind||pet.kind);galleryKind=playableSpecies[(idx+d+playableSpecies.length)%playableSpecies.length];galleryAction='auto';}
+ if(what==='stage'){galleryStage=Math.min(6,Math.max(1,galleryStage+d));}
+ render();}
+ else if(b.dataset.animation){galleryAction=b.dataset.animation;render()}else if(b.hasAttribute('data-backgallery')){panel='gallery';galleryAction='auto';render()}else if(b.hasAttribute('data-stopdemo'))closePanel();else if(b.dataset.answer!==undefined)answerQuiz(Number(b.dataset.answer));else if(b.hasAttribute('data-closequiz'))closePanel();}
+document.querySelector('.quickLinks').addEventListener('click',e=>{let b=e.target.closest('button');if(b?.dataset.quick)selectAction(b.dataset.quick)});$('toolbar').addEventListener('click',handler);$('sleepTracker').addEventListener('click',handler);$('modal').addEventListener('click',handler);$('previewControls').addEventListener('click',handler);
+$('meadowImportPassport').addEventListener('click',()=> $('passportFileInput').click());
+$('passportFileInput').addEventListener('change',async event=>{const file=event.target.files&&event.target.files[0];event.target.value='';await importPetPassport(file)});
+$('eggLayer').addEventListener('keydown',e=>{if(e.key==='Enter')return});
+$('adoptBtn').addEventListener('click',()=>{if(selected>=0&&playableSpecies.includes(species[selected].id))splash('adopt')});$('splashNo').onclick=()=>$('splash').classList.add('hidden');
+function keys(which){if(view==='meadow'){if(which==='A')pickEgg((selected+19)%20);if(which==='C')pickEgg((selected+1)%20);if(which==='B'&&selected>=0&&playableSpecies.includes(species[selected].id))splash('adopt');return}if(panel==='showcase'){if(which==='A')galleryStage=Math.max(1,galleryStage-1);if(which==='C')galleryStage=Math.min(6,galleryStage+1);if(which==='B')panel='gallery';galleryAction='auto';render();return}if(panel==='quiz'&&quiz){if(quiz.answered){if(which==='B')closePanel();return}if(which==='A')quizChoice=(quizChoice+quiz.item.a.length-1)%quiz.item.a.length;if(which==='C')quizChoice=(quizChoice+1)%quiz.item.a.length;if(which==='B')answerQuiz(quizChoice);render();return}if(panel){if(which==='B')closePanel();return}if(which==='A')tabIndex=(tabIndex+5)%6;if(which==='C')tabIndex=(tabIndex+1)%6;if(which==='B')selectAction(actions[tabIndex][2]);render()}
+for(let [id,w] of [['prev','A'],['select','B'],['next','C']])$(id).addEventListener('click',()=>{chirp();keys(w)});
+addEventListener('keydown',e=>{if(e.target?.tagName==='INPUT'){if(e.key==='Enter'&&!$('nameWrap').classList.contains('hidden'))finishHatch();return}if(!$('splash').classList.contains('hidden')){if(e.key==='Escape')$('splash').classList.add('hidden');return}let k=e.key.toLowerCase();if(view==='pet'&&k==='escape'){closePanel();return}if(view==='pet'&&panel==='showcase'&&k==='m'){moodPreview=moodOptions[(moodOptions.indexOf(moodPreview)+1)%moodOptions.length];render();return}if(view==='pet'&&panel==='showcase'&&k==='t'){galleryAction=teacherAnimations[(teacherAnimations.indexOf(galleryAction)+1)%teacherAnimations.length];render();return}if(view==='pet'&&k==='j'){panel='journal';render();return}if(view==='pet'&&k==='h'){panel='habitat';render();return}if(view==='pet'&&k==='o'){panel='options';render();return}if(view==='pet'&&k==='p'){panel='sanctuary';render();return}if(view==='pet'&&k==='c'){panel='care';render();return}let w=k==='a'||e.key==='ArrowLeft'?'A':k==='d'||e.key==='ArrowRight'?'C':k==='s'||e.key==='Enter'||e.key===' '?'B':null;if(w){e.preventDefault();chirp();keys(w)}});
+let audioCtx=null;
+function effect(name='tap'){
+ if(!sound)return;
+ try{
+  audioCtx??=new(window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state==='suspended')audioCtx.resume();
+  const now=audioCtx.currentTime;
+  let notes={tap:[[550,.06],[690,.06]],hatch:[[392,.11],[523,.12],[659,.14],[784,.2]],feed:[[250,.08],[320,.08],[390,.12]],clean:[[560,.09],[850,.1],[1080,.15]],play:[[490,.07],[670,.08],[860,.09]],rest:[[520,.12],[410,.14],[320,.21]],grow:[[400,.1],[520,.1],[660,.1],[900,.27]],sad:[[330,.13],[220,.18]],right:[[650,.08],[850,.13]],wrong:[[290,.14],[210,.17]],explore:[[410,.09],[540,.11],[690,.13]]}[name]||[[520,.07]];
+  let at=now;
+  for(const [freq,dur] of notes){const osc=audioCtx.createOscillator(),vol=audioCtx.createGain();osc.type=name==='rest'?'sine':'triangle';osc.frequency.setValueAtTime(freq,at);vol.gain.setValueAtTime(.0001,at);vol.gain.exponentialRampToValueAtTime(.075,at+.012);vol.gain.exponentialRampToValueAtTime(.0001,at+dur);osc.connect(vol);vol.connect(audioCtx.destination);osc.start(at);osc.stop(at+dur+.012);at+=dur*.9;}
+ }catch(e){}
+}
+let miniWindow=null,miniTimer=null,miniStyle='pet';
+function miniState(){
+ if(pet.caretakerUntil>Date.now())return {name:'Caretaker',color:'#88a9cb',bg:'#d5e5f6',symbol:'⌂',note:'Safe with caretaker'};
+ if(pet.asleep||pet.vacation)return {name:'Sleeping',color:'#768dc1',bg:'#d4e2fa',symbol:'☾',note:'Resting peacefully'};
+ if(pet.illness)return {name:'Sick',color:'#d4776d',bg:'#ffe1de',symbol:'✚',note:'Needs clinic visit'};
+ if(pet.hunger<42)return {name:'Hungry',color:'#d99b45',bg:'#fff0cf',symbol:'◒',note:'Needs food'};
+ if(pet.clean<50||pet.mess)return {name:'Dirty',color:'#bd9250',bg:'#fff0d5',symbol:'≈',note:'Needs cleaning'};
+ if(pet.energy<42)return {name:'Tired',color:'#9c95c3',bg:'#ece8ff',symbol:'Zz',note:'Needs sleep'};
+ if(pet.joy<42)return {name:'Lonely',color:'#ba86a0',bg:'#ffe0ee',symbol:'♡',note:'Needs comfort'};
+ return {name:'Content',color:'#4f9f79',bg:'#dcf4e4',symbol:'♥',note:'All needs met'};
+}
+function drawMini(){
+ if(!miniWindow||miniWindow.closed){if(miniTimer)clearInterval(miniTimer);miniTimer=null;miniWindow=null;return}
+ const d=miniWindow.document,st=miniState(),hunger=pet.hunger,clean=pet.clean,energy=pet.energy,joy=pet.joy;
+ d.body.style.background=st.bg;
+ const root=d.getElementById('miniRoot');if(!root)return;
+ const petFace=miniStyle==='pet'?`<div class="petart"><span class="ears">◢　　　◣</span><span class="eyes">${st.name==='Sleeping'?'–　–':st.name==='Sick'?'﹀　﹀':'●　●'}</span><span class="mouth">${st.name==='Content'?'ᴗ':st.name==='Hungry'?'o':'⌢'}</span></div>`:'';
+ root.innerHTML=`<div class="top">POCKET CRITTERS <span>⤢</span></div><div class="status">${petFace}<div class="bubble">${st.symbol}</div><strong>${pet.name}</strong><small>${st.note}</small></div><div class="indicators"><span title="Food ${hunger}%">🍎${Math.round(hunger)}</span><span title="Joy ${joy}%">♡${Math.round(joy)}</span><span title="Energy ${energy}%">☾${Math.round(energy)}</span><span title="Clean ${clean}%">✦${Math.round(clean)}</span></div><div class="hint">Click anywhere to return to game</div>`;
+ root.onclick=()=>{try{miniWindow.close()}catch(e){}miniWindow=null;try{window.focus()}catch(e){};panel='';render()};
+}
+async function openMini(style){
+ miniStyle=style==='status'?'status':'pet';const w=miniStyle==='pet'?215:175,h=miniStyle==='pet'?265:120;
+ try{if(miniWindow&&!miniWindow.closed)miniWindow.close()}catch(e){}
+ try{
+   if(window.documentPictureInPicture?.requestWindow){miniWindow=await window.documentPictureInPicture.requestWindow({width:w,height:h})}
+   else {miniWindow=window.open('','PocketCrittersMini','width='+w+',height='+h+',resizable=yes,scrollbars=no');if(!miniWindow)throw Error('Popup blocked')}
+   const d=miniWindow.document;d.open();d.write(`<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box}body{margin:0;font:12px Trebuchet MS,Arial,sans-serif;color:#305b52;overflow:hidden;transition:background .25s}#miniRoot{height:100vh;cursor:pointer;padding:5px 7px}.top{display:flex;justify-content:space-between;font-weight:900;letter-spacing:1px;font-size:9px}.status{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}.status strong{font-size:12px}.status small{font-size:10px}.bubble{position:absolute;top:25%;right:10px;border-radius:40px;background:white;padding:3px 6px;font-weight:bold}.petart{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid #52876e;border-radius:47% 47% 40% 40%;width:88px;height:91px;background:#90c9a4;margin:8px 0 3px;box-shadow:inset 0 5px #c3edcd}.ears{position:absolute;top:-18px;color:#4a8d6b;font-size:17px}.eyes{font-size:20px;letter-spacing:2px;line-height:23px}.mouth{font-size:17px}.indicators{display:flex;justify-content:space-around;gap:3px;margin-top:5px;font-weight:bold;font-size:10px}.indicators span{background:#ffffffa8;padding:2px 3px;border-radius:4px}.hint{text-align:center;font-size:8px;margin-top:5px}
+/* v3.7: distinguish gallery previews from the actual saved pet. */
+.previewControls .previewNav{display:flex;align-items:center;gap:4px;width:100%;justify-content:space-between;background:#dcebdc;padding:4px;border-radius:5px;border:1px solid #8fb7a4}
+.previewControls .previewNav strong{color:#345e54;font-size:10px;text-align:center;flex:1;line-height:1.3}
+.previewControls .previewNav button{font-size:10px;white-space:nowrap;min-height:25px}
+.previewControls .assetCheck{width:100%;color:#315f4c;font-size:10px;padding:3px 5px;font-weight:700;text-align:center}
+.previewControls .assetCheck.missing{background:#fff0bd;color:#744832;border:1px solid #c19460;border-radius:4px}
+.bottomUI .speech.gallerySpeech{background:#d5f0e5;color:#285d56;font-weight:700}
+/* v3.7.2: compact daily growth tracker. Saves and animations remain unchanged. */
+.careTracker{background:#e5f1df;color:#315b4c;border-top:2px solid #a4c6aa;padding:6px 8px 5px;font-weight:800;font-size:10px}
+.careTracker.hidden{display:none!important}
+.careTop{display:flex;align-items:center;justify-content:space-between;gap:5px}
+.careTop strong{font-size:10.5px;letter-spacing:.2px}.careTop span{font-size:10px;white-space:nowrap}
+.careProgress{height:6px;background:#bdd3bd;overflow:hidden;border:1px solid #91b69a;border-radius:8px;margin:4px 0 5px}
+.careProgress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#77bb99,#d4ba68);transition:width .35s}
+.careSteps{display:flex;justify-content:space-between;gap:5px;font-size:9px;font-weight:800;line-height:1.3}
+.careSteps .complete{color:#226e4e}.careSteps .pending{color:#856e51}
+.careTracker.finished{background:#d4ebd4}.careTracker.finished .careProgress i{background:#68a878}
+@media(max-width:420px){.careTracker{padding:5px 6px 4px}.careSteps{font-size:8px}}
+</style></head><body><div id="miniRoot"></div></body></html>`);d.close();
+   if(miniTimer)clearInterval(miniTimer);drawMini();miniTimer=setInterval(drawMini,2000);
+   notify(miniStyle==='pet'?'Mini Pet opened. Leave the original tab running.':'Mini Status opened. Leave the original tab running.');
+ }catch(e){miniWindow=null;notify('Floating Mini Mode is unavailable here. Try Chrome on your GitHub Pages site.');}
+}
+
+function chirp(){effect('tap')}
+// Detailed illustrated creature sprites extracted from the original approved art sheets.
+// Each image is a separate transparent PNG in assets/, not a concept-sheet poster.
+const illustratedSpecies=['frostell','sporekin','pebblot','moonbat','voltwing'];
+const animatedSpecies=['frostell','sporekin','pebblot','moonbat','voltwing'];
+// Dedicated Frostell production frames, deliberately separate from the other nine pets.
+// Frames are self-contained transparent PNGs with fixed foot alignment.
+const premiumFrames={};
+for(const kind of animatedSpecies){
+ premiumFrames[kind]={};
+ for(let stage=1;stage<=6;stage++){
+  const count=stage===1?5:17;
+  premiumFrames[kind][stage]=Array.from({length:count},(_,idx)=>{
+    const img=new Image();img.src=`assets/${kind}_anim/${stage}_${String(idx).padStart(2,'0')}.png`;return img;
+  });
+ }
+}
+function premiumPose(stage,mood,t,act){
+ if(stage===1)return Math.floor(t/700)%5;
+ if(act==='sleep'||mood==='sleepy')return [8,9,10,9][Math.floor(t/650)%4];
+ if(mood==='sick'||act==='sick')return 15;
+ if(mood==='dirty'||act==='dirty')return 16;
+ if(act==='angry'||(mood==='sad'&&pet.joy<48))return 14;
+ if(act==='eat')return [6,7,6,7][Math.floor(t/230)%4];
+ if(act==='play'||act==='celebrate'||act==='happy')return [11,12,11,0][Math.floor(t/255)%4];
+ if(act==='wash'||act==='clean')return [12,0,12,0][Math.floor(t/290)%4];
+ if(act==='walk'||act==='flutter')return [0,2,3,4,5,0][Math.floor(t/185)%6];
+ if(act==='sniff'||act==='look'||act==='spores')return [0,13,0,1][Math.floor(t/720)%4];
+ if(mood==='sad')return 13;
+ if(mood==='excited')return [12,0,1][Math.floor(t/350)%3];
+ return [0,0,0,1,0,0,13,0][Math.floor(t/540)%8];
+}
+function animatedPremium(kind,stage,mood,t,act){
+ const pose=premiumPose(stage,mood,t,act),list=premiumFrames[kind]?.[stage]||premiumFrames[kind]?.[2];
+ let im=list?.[pose];if(!im||!im.complete||!im.naturalWidth)im=list?.[0];
+ if(!im||!im.complete||!im.naturalWidth){illustratedCreature(stage,mood,t);return;}
+ cx.save();ellipse(120,179,47,6,'#426b5960');
+ cx.imageSmoothingEnabled=false;cx.drawImage(im,54,29,132,160);
+ if(mood==='excited')for(const [x,y] of [[62,73],[190,100]])glitter(x,y,4,'#f9eac0');
+ if(mood==='sad')ellipse(140,91,2,4,'#74b8ed');
+ cx.restore();
+}
+const artSprites={};for(const kind of illustratedSpecies){artSprites[kind]={};for(let st=1;st<=6;st++){const im=new Image();im.src=`assets/${kind}_${st}.png`;artSprites[kind][st]=im}for(const mood of ['happy','sleepy','dirty','sick']){const im=new Image();im.src=`assets/${kind}_${mood}.png`;artSprites[kind][mood]=im}}
+function illustratedCreature(stage,mood,t){
+ const images=artSprites[(panel==='gallery'||panel==='showcase')?(galleryKind||pet.kind):pet.kind];if(!images)return;
+ // Condition-specific illustrated variants are used for advanced forms.
+ const key=stage===5&&['happy','sleepy','dirty','sick'].includes(mood)?mood:stage;
+ let im=images[key];if(!im||!im.complete||!im.naturalWidth)im=images[stage];
+ if(!im||!im.complete||!im.naturalWidth)return;
+ const maxW=107,maxH=91,sc=Math.min(maxW/im.naturalWidth,maxH/im.naturalHeight),dw=im.naturalWidth*sc,dh=im.naturalHeight*sc;
+ cx.save();cx.translate(120,119+Math.sin(t/(mood==='sleepy'?900:420))*(mood==='sleepy'?1:2));cx.imageSmoothingEnabled=false;
+ // Grounded feet and shadow are drawn *behind* the illustrated source to soften a
+ // few legacy art-sheet crops; bespoke full-body source assets are still needed.
+ if(stage>=3){const footColors={frostell:['#e5f0ff','#6580ac'],sporekin:['#ffdaa3','#ad654f'],pebblot:['#98a094','#51696b'],moonbat:['#a98bea','#594184'],voltwing:['#f5bb67','#745783']};
+  const [fill,edge]=footColors[(panel==='gallery'||panel==='showcase')?(galleryKind||pet.kind):pet.kind]||['#d7cf9d','#596a60'];
+  ellipse(0,53,53,6,'#3c5d5280');
+  for(const x of [-26,26]){ellipse(x,46,17,9,edge);ellipse(x,44,13,7,fill);}
+ }
+ cx.drawImage(im,-dw/2,-dh/2,dw,dh);
+ // Tiny blades of grass in the foreground conceal the straight crop seam on
+ // illustrated art sourced from a crowded concept board.
+ if(stage>=3){for(let i=-4;i<=4;i++){const x=i*12;cx.strokeStyle=i%2?'#5f9c62':'#83b574';cx.lineWidth=2;cx.beginPath();cx.moveTo(x,53);cx.lineTo(x+(i%3-1)*3,46-(i%2)*3);cx.stroke();}}
+
+ if(mood==='dirty'&&stage<5){for(const [dx,dy] of [[-37,19],[-18,32],[28,27]])ellipse(dx,dy,5,3,'#806845c9')}
+ if(mood==='sleepy'&&stage<5){cx.fillStyle='#4a567d';cx.font='bold 13px monospace';cx.fillText('Z z',48,-32)}
+ if(mood==='sick'&&stage<5){cx.fillStyle='#5089ac';cx.font='bold 16px sans-serif';cx.fillText('•',50,-34)}
+ if(mood==='sad'){ellipse(-24,10,2,4,'#83c3e7')}
+ if(mood==='excited') {glitter(-63,-35,3,'#fff2b5');glitter(59,-25,3,'#fff2b5')}
+ cx.restore();
+}
+// Handmade low-resolution 16-bit-inspired creature art. Each developmental stage has a separate silhouette.
+const cv=$('petCanvas'),cx=cv.getContext('2d');cx.imageSmoothingEnabled=false;const P=(x,y,w,h,c)=>{cx.fillStyle=c;cx.fillRect(Math.round(x),Math.round(y),Math.ceil(w),Math.ceil(h))};
+function ellipse(x,y,rx,ry,c){cx.fillStyle=c;cx.beginPath();cx.ellipse(Math.round(x),Math.round(y),rx,ry,0,0,Math.PI*2);cx.fill()}
+function poly(pts,c){cx.fillStyle=c;cx.beginPath();cx.moveTo(...pts[0]);for(let i=1;i<pts.length;i++)cx.lineTo(...pts[i]);cx.closePath();cx.fill()}
+function line(x1,y1,x2,y2,width,c){cx.strokeStyle=c;cx.lineWidth=width;cx.lineCap='square';cx.beginPath();cx.moveTo(x1,y1);cx.lineTo(x2,y2);cx.stroke()}
+function glitter(x,y,s,c){P(x-1,y-s,3,s*2+1,c);P(x-s,y-1,s*2+1,3,c);P(x,y,2,2,'#fff9cc')}
+function leaf(x,y,scale,rot,color){cx.save();cx.translate(x,y);cx.rotate(rot);poly([[0,0],[7*scale,-11*scale],[21*scale,-13*scale],[18*scale,-4*scale],[4*scale,3*scale]],'#244f40');poly([[2*scale,-1*scale],[8*scale,-10*scale],[18*scale,-11*scale],[15*scale,-5*scale]],color);line(2*scale,0,16*scale,-10*scale,1.2*scale,'#b9dc93');cx.restore()}
+const cpal={outline:'#254943',dark:'#376c51',mid:'#659b68',light:'#8ecb7e',bright:'#cde49b',belly:'#e2dda8',pink:'#e9a5a3',eye:'#203c45',gold:'#e8d087',shadow:'#355449'};
+function backdrop(t){let habitat=pet.habitat,night=habitat==='twilight';P(0,0,240,248,night?'#72829b':habitat==='pond'?'#94c9d5':'#a4d4b9');for(let y=60;y<180;y+=3)P(0,y,240,3,night?'#788c9b':habitat==='meadow'?'#c1e4bf':'#b7dbba');ellipse(197,52,22,22,night?'#dce4f1':'#fff1bd');for(let i=0;i<5;i++){let xx=13+i*52;poly([[xx-32,168],[xx+22,84+(i%3)*22],[xx+81,168]],night?'#667d87':'#90b9a1')}P(0,170,240,78,habitat==='pond'?'#72b5bb':habitat==='twilight'?'#577f7c':'#6fa881');poly([[0,186],[43,160],[85,190],[150,168],[208,190],[240,173],[240,248],[0,248]],habitat==='meadow'?'#8fc296':'#6ea47a');for(let i=0;i<13;i++){let x=i*23-5,yy=168+(i%3)*8;P(x+6,yy+9,4,27,'#695a42');poly([[x-5,yy+17],[x+8,yy-22],[x+21,yy+17]],i%2?'#2f805e':'#397c5c');poly([[x,yy+5],[x+8,yy-20],[x+16,yy+5]],'#4e9772')}if(habitat==='pond'){P(0,205,240,43,'#5c9ea9');for(let i=0;i<13;i++)P(i*21,211+i%3*10,16,2,'#b7e4df')}else{for(let i=0;i<31;i++){let x=(i*71)%240,y=206+(i*17%33);P(x,y,2,6,'#487f59');P(x-3,y,8,2,i%3?'#decc92':'#eeafbc')}}ellipse(120,214,70,9,'#375b5355');if(!night)for(let i=0;i<5;i++)glitter(20+i*48,68+i%3*21,2,'#e9f0cd')}
+function eggPet(t){const y=108+Math.sin(t/370)*3;ellipse(119,213,32,6,'#2d575450');ellipse(120,y,27,35,cpal.outline);ellipse(120,y-1,24,32,'#9ac18b');ellipse(115,y-7,20,23,'#c7d9a0');ellipse(113,y-15,10,8,'#e7ecb5');poly([[116,y-32],[127,y-30],[118,y-20],[128,y-12],[119,y-5]],'#668f63');leaf(108,y+13,.55,-.6,'#85b96d');glitter(153,y-26,3,'#fff2b7')}
+function eyes(x,y,space,mood,t,sz=1){let blink=Math.floor(t/1800)%7===0&&t%1800<180,eyeW=4*sz,eyeH=7*sz;
+if(mood==='sleepy'){line(x-space-6*sz,y,x-space+5*sz,y+2*sz,2*sz,cpal.eye);line(x+space-6*sz,y+2*sz,x+space+5*sz,y,2*sz,cpal.eye)}else if(mood==='sad'||mood==='sick'){ellipse(x-space,y,eyeW,eyeH+2*sz,cpal.eye);ellipse(x+space,y,eyeW,eyeH+2*sz,cpal.eye);P(x-space-2*sz,y-3*sz,2*sz,3*sz,'#f7fff0');P(x+space-2*sz,y-3*sz,2*sz,3*sz,'#f7fff0');if(mood==='sad'){P(x-space+4*sz,y+10*sz,3*sz,6*sz,'#99d6e6')}}else if(blink){line(x-space-4*sz,y,x-space+4*sz,y,2*sz,cpal.eye);line(x+space-4*sz,y,x+space+4*sz,y,2*sz,cpal.eye)}else{ellipse(x-space,y,eyeW+1*sz,eyeH,cpal.eye);ellipse(x+space,y,eyeW+1*sz,eyeH,cpal.eye);P(x-space-2*sz,y-3*sz,3*sz,4*sz,'#fff');P(x+space-2*sz,y-3*sz,3*sz,4*sz,'#fff');P(x-space+2*sz,y+2*sz,2*sz,2*sz,'#a5d0bd');P(x+space+2*sz,y+2*sz,2*sz,2*sz,'#a5d0bd')}
+let yy=y+11*sz;if(mood==='happy'||mood==='dirty'){line(x-5*sz,yy,x,yy+4*sz,2*sz,cpal.eye);line(x,yy+4*sz,x+5*sz,yy,2*sz,cpal.eye)}else if(mood==='excited'){ellipse(x,yy+1*sz,6*sz,6*sz,cpal.eye);P(x-2*sz,yy+4*sz,5*sz,3*sz,'#e68e92')}else if(mood==='sad'||mood==='sick'){line(x-5*sz,yy+4*sz,x,yy,2*sz,cpal.eye);line(x,yy,x+5*sz,yy+4*sz,2*sz,cpal.eye)}else{line(x-3*sz,yy,x+3*sz,yy,2*sz,cpal.eye)} }
+function flecks(x,y,mood,scale=1){if(mood==='dirty'){for(let [dx,dy] of [[-28,-9],[16,17],[-10,23],[26,-14],[-24,19]]){ellipse(x+dx*scale,y+dy*scale,5*scale,3*scale,'#766a48');P(x+(dx+2)*scale,y+(dy-1)*scale,3*scale,2*scale,'#94764c')}}else if(mood==='sick'){P(x-22*scale,y-13*scale,5*scale,7*scale,'#9cb69b');P(x+25*scale,y+6*scale,6*scale,9*scale,'#9ab9a2');ellipse(x+30*scale,y-31*scale,3*scale,6*scale,'#9cd5dd')}else if(mood==='excited'){glitter(x-35*scale,y-34*scale,4*scale,'#ffe4a5');glitter(x+35*scale,y-30*scale,3*scale,'#fff2bc')}else if(mood==='sleepy'){P(x+30*scale,y-35*scale,5*scale,4*scale,'#fff5d7');P(x+36*scale,y-45*scale,6*scale,4*scale,'#fff5d7')}}
+function creature(stage,mood,t){cx.save();const bounce=mood==='sleepy'?Math.sin(t/900)*1.5:Math.sin(t/360)*3;let artY=stage===2?93:stage===3?105:stage===4?107:stage===5?112:115;cx.translate(120,artY+bounce);let s=stage,scale=s<=2?.92:s===3?.84:s===4?.76:s===5?.68:.62;cx.scale(scale,scale);let x=0,y=0;
+// development 2: round seed-hatchling with first two leaf ears
+if(s===2){ellipse(0,55,42,8,'#1e4b3e66');ellipse(0,9,40,43,cpal.outline);ellipse(0,7,36,40,cpal.mid);ellipse(-5,-8,24,19,cpal.light);ellipse(0,19,21,21,cpal.belly);ellipse(-27,49,13,8,cpal.outline);ellipse(27,49,13,8,cpal.outline);ellipse(-26,46,10,6,cpal.dark);ellipse(26,46,10,6,cpal.dark);leaf(-19,-36,.9,-.5,'#72ab69');leaf(8,-43,.95,.1,'#82be78');eyes(0,5,17,mood,t,1);ellipse(-27,23,6,3,cpal.pink);ellipse(27,23,6,3,cpal.pink);for(let i=0;i<6;i++)P(-31+i*11,28+(i%2)*7,3,2,'#a9d186');flecks(0,10,mood,1);}
+// development 3: four-footed leaf cub, oversize leaf ears and fluffy tail
+if(s===3){ellipse(0,58,51,8,'#1e4b3e66');ellipse(39,23,24,18,cpal.outline);ellipse(42,17,20,15,cpal.light);for(let i=0;i<3;i++)leaf(38+i*5,14-i*9,.5,-.1,'#90c977');ellipse(0,25,42,32,cpal.outline);ellipse(0,20,38,29,cpal.mid);for(let dx of [-26,23]){ellipse(dx,47,14,15,cpal.outline);ellipse(dx,42,11,12,cpal.dark)}ellipse(0,-9,37,35,cpal.outline);ellipse(0,-11,33,32,cpal.light);leaf(-35,-31,1.2,-.52,'#78b76e');leaf(10,-43,1.2,.12,'#8ec579');ellipse(0,16,24,15,cpal.belly);eyes(0,-13,18,mood,t,1);ellipse(-27,2,6,3,cpal.pink);ellipse(27,2,6,3,cpal.pink);for(let i=0;i<9;i++)P(-28+(i*9)%58,-25+(i*11)%40,3,2,cpal.bright);flecks(0,0,mood,1);}
+// development 4: athletic fox/stoat form, sweeping branch tail, layered leaf mantle
+if(s===4){ellipse(0,69,65,8,'#1e4b3e66');poly([[23,12],[48,-8],[80,-24],[65,3],[79,19],[56,27],[38,34]],cpal.outline);poly([[27,13],[52,-3],[73,-17],[59,6],[72,17],[52,22]],cpal.mid);for(let i=0;i<4;i++)leaf(44+i*8,3+i*3,.5,i*.4,'#b7d78b');poly([[-36,5],[-35,62],[-19,62],[-14,23],[10,24],[16,60],[35,60],[35,-5]],cpal.outline);poly([[-32,10],[-30,58],[-22,58],[-18,21],[11,20],[19,57],[29,57],[29,-8]],cpal.dark);ellipse(0,3,38,41,cpal.outline);ellipse(0,-1,35,38,cpal.mid);ellipse(0,8,22,30,cpal.belly);for(let j=0;j<6;j++){leaf(-34+j*13,3+(j%2)*7,.6,-.7+j*.2,j%2?'#559566':'#a6cd79')}poly([[-34,-24],[-47,-54],[-20,-45],[-11,-28]],cpal.outline);poly([[13,-31],[26,-57],[45,-39],[29,-20]],cpal.outline);poly([[-32,-28],[-41,-48],[-21,-41]],'#87c57b');poly([[18,-32],[27,-48],[37,-40]],'#87c57b');ellipse(0,-27,28,27,cpal.light);eyes(0,-30,15,mood,t,.9);ellipse(-25,-17,6,3,cpal.pink);ellipse(25,-17,6,3,cpal.pink);line(-18,42,-29,44,3,'#a6cb84');line(18,42,28,44,3,'#a6cb84');flecks(0,-2,mood,.9);}
+// development 5: forest stag guardian, branch antlers and moss cloak
+if(s===5){ellipse(0,79,72,9,'#1e4b3e66');for(let side of [-1,1]){let xx=side*25;line(xx,-49,side*45,-80,7,cpal.outline);line(side*45,-80,side*60,-100,6,cpal.dark);line(side*41,-74,side*28,-94,6,cpal.dark);line(side*52,-92,side*69,-91,5,cpal.dark);leaf(side*53,-89,.6,side===1?-.3:-2.6,'#b8d992')}for(let xx of [-32,25]){poly([[xx-9,10],[xx-13,69],[xx+7,69],[xx+12,12]],cpal.outline);poly([[xx-7,15],[xx-9,65],[xx+4,65],[xx+8,13]],cpal.dark);P(xx-14,66,27,7,'#2b4e42')}ellipse(0,2,52,50,cpal.outline);ellipse(0,-1,47,46,cpal.mid);for(let j=0;j<8;j++){let xx=-47+j*13;leaf(xx,-11+(j%3)*4,.7,-.6+j*.17,j%2?'#3c7754':'#a2cd83')}ellipse(0,10,27,32,cpal.belly);ellipse(0,-45,38,35,cpal.outline);ellipse(0,-47,35,32,cpal.light);poly([[-33,-63],[-47,-86],[-17,-75]],cpal.dark);poly([[33,-63],[47,-86],[17,-75]],cpal.dark);leaf(-15,-72,.8,-.9,'#9cca79');leaf(4,-80,.8,.2,'#bddb8e');eyes(0,-52,17,mood,t,.9);ellipse(-28,-38,6,3,cpal.pink);ellipse(28,-38,6,3,cpal.pink);for(let i=0;i<12;i++)P(-42+(i*17)%83,-12+(i*13)%38,3,3,i%2?'#2d6a51':'#cbe39a');flecks(0,0,mood,1);}
+// development 6: Elderwood spirit, sweeping wings/vines, crown and glowing heart
+if(s===6){ellipse(0,80,86,11,'#1e4b3e66');for(let side of [-1,1]){poly([[side*26,-10],[side*50,-68],[side*92,-82],[side*75,-28],[side*100,16],[side*46,18]],cpal.outline);poly([[side*32,-11],[side*54,-56],[side*85,-70],[side*67,-27],[side*91,10],[side*43,8]],side===1?'#4c8f6a':'#79b17b');for(let j=0;j<4;j++)leaf(side*(49+j*11),-44+j*12,.62,j*.5+ (side===1?0:2),'#b9d58b')}for(let side of [-1,1]){poly([[side*18,12],[side*22,70],[side*43,70],[side*46,10]],cpal.outline);poly([[side*23,17],[side*26,65],[side*40,65],[side*42,12]],cpal.dark);P(side*23-9,66,29,6,'#264a42')}ellipse(0,9,48,52,cpal.outline);ellipse(0,4,44,48,cpal.mid);for(let i=0;i<7;i++)leaf(-37+i*12,-7+i%3*5,.65,-.7+i*.18,'#a5cf82');ellipse(0,20,22,25,'#eadca4');poly([[-27,-38],[-48,-93],[-17,-68]],cpal.outline);poly([[27,-38],[48,-93],[17,-68]],cpal.outline);poly([[-28,-47],[-40,-78],[-19,-66]],'#6ea779');poly([[28,-47],[40,-78],[19,-66]],'#6ea779');ellipse(0,-40,36,39,cpal.outline);ellipse(0,-43,32,35,cpal.light);for(let side of [-1,1]){line(side*17,-68,side*39,-103,8,cpal.outline);line(side*39,-103,side*57,-108,5,cpal.dark);line(side*31,-90,side*21,-112,5,cpal.dark);leaf(side*36,-99,.55,side===1?-.8:-2.1,'#c4dd87')}leaf(-6,-87,1.05,-.48,'#cde39a');eyes(0,-47,17,mood,t,.95);ellipse(-25,-32,6,3,cpal.pink);ellipse(25,-32,6,3,cpal.pink);glitter(0,16,6,'#ffedbb');for(let i=0;i<10;i++){let ang=i*Math.PI/5+t/2300;glitter(Math.cos(ang)*65,Math.sin(ang)*48-9,i%3===0?3:2,'#e5ecaf')}flecks(0,-12,mood,1);}
+cx.restore();}
+
+// Build Two: four new original species renderers. Each has its own anatomy,
+// growth-specific ornaments and silhouettes, and reactive face/condition art.
+// Drawn directly to the pixel canvas; no sprite recolor shortcuts.
+function newCreature(stage,mood,t,kind=pet.kind){
+ cx.save();
+ const bob=mood==='sleepy'?Math.sin(t/870)*1.2:Math.sin(t/360)*2.6;
+ cx.translate(120,111+bob);
+ const grow=[0,0,.67,.79,.92,1.02,1.10][stage]||1;
+ cx.scale(grow,grow);
+ const k=kind;
+ let O='#263c4a',D='#436b76',M='#8bc7d2',L='#d4f3e9',B='#fff0d1',A='#eda7b6',G='#edc46d';
+ function limb(x,y,w,h,c){ellipse(x,y,w,h,O);ellipse(x,y-2,w-3,h-3,c)}
+ function face(y,wide=17){eyes(0,y,wide,mood,t,.86);ellipse(-wide-8,y+11,5,2,A);ellipse(wide+8,y+11,5,2,A)}
+ function crownSpots(color,n=7){for(let i=0;i<n;i++){let x=-42+i*13;P(x,-34+(i%3)*7,4,4,color)}}
+ if(k==='petalhorn'){
+   O='#594655';D='#b87d7d';M='#ddaa9c';L='#f7d6c3';B='#fff0d7';A='#e885a0';G='#f1c57f';
+   // Distinct deer/flower silhouette: four delicate legs, upright neck, flower mane, branching antlers.
+   if(stage>=4){limb(-29,54,12,24,D);limb(29,54,12,24,D);
+     ellipse(0,26,53,35,O);ellipse(0,23,49,32,M);
+     ellipse(0,5,32,26,B);
+     if(stage>=5){for(let side of [-1,1]){
+       line(side*20,-45,side*44,-87,8,O);line(side*42,-82,side*58,-105,6,D);
+       line(side*37,-73,side*23,-96,5,D);if(stage===6){line(side*52,-97,side*74,-96,5,O);leaf(side*55,-100,.6,side>0?-.1:-2.4,'#db9daa')}
+     }}
+   }else{
+     limb(-23,50,12,14,D);limb(23,50,12,14,D);
+     ellipse(0,22,40,32,O);ellipse(0,18,36,29,M);ellipse(0,25,23,20,B);
+   }
+   // floppy leaf ears become an elaborate blossom crown
+   poly([[-25,-37],[-68,-58],[-51,-20],[-31,-8]],O);
+   poly([[25,-37],[68,-58],[51,-20],[31,-8]],O);
+   poly([[-28,-33],[-62,-51],[-48,-21]],'#eaa5af');
+   poly([[28,-33],[62,-51],[48,-21]],'#eaa5af');
+   ellipse(0,-29,35,33,O);ellipse(0,-32,31,29,L);
+   for(let i=0;i<(stage>=5?9:stage>=3?6:3);i++){
+     let a=i*Math.PI*2/(stage>=5?9:stage>=3?6:3)-1.57;
+     let r=stage>=5?41:32;
+     ellipse(Math.cos(a)*r,Math.sin(a)*r-33,stage>=5?10:8,stage>=5?14:10,O);
+     ellipse(Math.cos(a)*r,Math.sin(a)*r-34,stage>=5?8:6,stage>=5?11:8,i%2?'#ffdfaa':'#f3a8c5');
+   }
+   ellipse(0,-70,8,7,'#edcc69');face(-35,16);
+   if(stage===6){for(let i=0;i<9;i++){let a=i*6.283/9+t/4000;glitter(Math.cos(a)*73,Math.sin(a)*55-15,3,'#ffe2b7')}}
+   flecks(0,-12,mood,.82);
+ } else if(k==='ripplet'){
+   O='#264f6d';D='#2f8fa4';M='#63c9cb';L='#a3edf0';B='#d6f5e5';A='#eea8a6';G='#f7d18d';
+   // Aquatic turtle/axolotl: broad shell, flippers, frilled gills, tidal crest.
+   for(let side of [-1,1]){
+     poly([[side*24,15],[side*78,15],[side*73,46],[side*38,50]],O);
+     poly([[side*31,22],[side*70,23],[side*67,41],[side*41,43]],M);
+     for(let j=0;j<(stage>=4?4:2);j++){line(side*(33+j*11),25+j*3,side*(39+j*10),38+j*2,2,L)}
+   }
+   if(stage>=4){poly([[-16,17],[-30,59],[0,53],[21,58],[15,16]],O);poly([[-10,21],[-22,52],[0,47],[16,50],[9,19]],D)}
+   ellipse(0,27,58,38,O);ellipse(0,25,54,35,D);ellipse(0,19,45,28,M);
+   for(let i=0;i<6;i++){let a=i*6.283/6;ellipse(Math.cos(a)*33,20+Math.sin(a)*21,11,8,i%2?'#9fdbe6':'#6abac9')}
+   ellipse(0,0,35,33,O);ellipse(0,-3,31,29,L);
+   for(let side of [-1,1]){
+      for(let j=0;j<(stage>=3?3:2);j++){
+       let yy=-25+j*14;
+       poly([[side*27,yy],[side*(43+j*4),yy-11],[side*(38+j*4),yy+9]],O);
+       poly([[side*30,yy],[side*(40+j*4),yy-6],[side*(37+j*3),yy+5]],j%2?'#efb6cc':'#9ce7e6');
+      }
+   }
+   if(stage>=5){for(let i=0;i<5;i++)glitter(-49+i*24,-54+(i%2)*-6,2,'#e0fafa')}
+   if(stage===6){poly([[-22,-47],[0,-84],[23,-45]],O);poly([[-17,-48],[0,-76],[17,-48]],'#f5d3d7');
+     for(let side of [-1,1]){poly([[side*42,2],[side*94,-22],[side*75,39]],O);poly([[side*47,1],[side*85,-15],[side*69,32]],'#83dae5')}}
+   face(-8,16);flecks(0,2,mood,.8);
+   if(mood==='happy'||mood==='excited'){for(let i=0;i<3;i++){ellipse(-64+i*62,-40-i%2*19,5+i,6+i,'#bdf4f5');ellipse(-66+i*62,-43-i%2*19,2,2,'#fff')}}
+ } else if(k==='cindlet'){
+   O='#5a3a43';D='#9e4b42';M='#ec7a4b';L='#f8bd79';B='#ffe3b3';A='#f4a4a7';G='#ffde78';
+   // Fox line: angular pointed ears, curled ember tail, fiery spine; Stage 6 sprouts flame wings.
+   poly([[17,9],[49,0],[69,-29],[83,-20],[69,-5],[85,15],[62,42],[38,37]],O);
+   poly([[26,10],[53,3],[70,-21],[65,-1],[76,17],[59,31],[44,31]],M);
+   for(let i=0;i<(stage>=5?5:3);i++){
+     let x=45+i*7;poly([[x,2-i*4],[x-7,-12-i*5],[x+6,-8-i*5]],i%2?L:G)}
+   if(stage>=4){for(let side of [-1,1])limb(side*26,52,12,21,D);
+     ellipse(0,17,43,40,O);ellipse(0,13,39,36,D);ellipse(0,21,22,26,B);
+   }else{limb(-26,47,11,12,D);limb(26,47,11,12,D);ellipse(0,21,38,32,O);ellipse(0,17,34,29,M);ellipse(0,25,20,20,B)}
+   poly([[-29,-19],[-42,-77],[-9,-49]],O);poly([[29,-19],[42,-77],[9,-49]],O);
+   poly([[-27,-24],[-36,-65],[-12,-44]],M);poly([[27,-24],[36,-65],[12,-44]],M);
+   ellipse(0,-20,33,32,O);ellipse(0,-23,30,28,L);
+   poly([[-23,-11],[0,2],[23,-11],[0,20]],B);
+   for(let i=0;i<(stage>=3?5:3);i++){
+     let x=-24+i*12;poly([[x,-51],[x+5,-66-(i%2)*15],[x+13,-50]],i%2?G:M)
+   }
+   if(stage>=5){for(let side of [-1,1]){poly([[side*34,12],[side*68,-31],[side*61,28]],O);poly([[side*40,9],[side*63,-22],[side*55,21]],L)}}
+   if(stage===6){for(let side of [-1,1]){poly([[side*42,-6],[side*93,-90],[side*90,19]],O);poly([[side*47,-9],[side*86,-78],[side*84,11]],M);glitter(side*92,-77,4,G)}}
+   face(-24,15);flecks(0,-4,mood,.85);
+ } else if(k==='cloudlet'){
+   O='#425472';D='#7186bb';M='#a7bddd';L='#e2edfa';B='#fff7e4';A='#e7b5c6';G='#eaca8b';
+   // Sky owl: round feathered body, scalloped cloud wings, talons, feather crown.
+   for(let side of [-1,1]){
+     let wide=stage>=5?90:stage>=3?70:52;
+     poly([[side*26,0],[side*wide,-30],[side*(wide-10),25],[side*28,33]],O);
+     poly([[side*30,0],[side*(wide-8),-24],[side*(wide-13),16],[side*28,25]],M);
+     for(let j=0;j<4;j++){ellipse(side*(34+j*(wide-40)/4),13-(j%2)*8,10,8,L)}
+   }
+   ellipse(0,23,43,42,O);ellipse(0,20,40,38,D);ellipse(0,24,28,27,B);
+   for(let side of [-1,1]){limb(side*23,59,10,8,G);line(side*21,59,side*18,69,3,O);line(side*24,59,side*30,69,3,O)}
+   if(stage>=4){for(let i=0;i<5;i++)ellipse(-23+i*11,-45+(i%2)*-8,10,21,i%2?L:M)}
+   poly([[-27,-32],[-41,-61],[-9,-44]],O);poly([[27,-32],[41,-61],[9,-44]],O);
+   ellipse(0,-21,37,35,O);ellipse(0,-23,34,32,L);
+   ellipse(-16,-28,16,18,B);ellipse(16,-28,16,18,B);
+   poly([[-6,-9],[0,1],[6,-9]],G);
+   if(stage>=5){for(let side of [-1,1])poly([[side*26,-48],[side*39,-80],[side*48,-51]],O)}
+   if(stage===6){for(let i=0;i<9;i++){let a=i*6.283/9+t/2500;glitter(Math.cos(a)*77,Math.sin(a)*56-16,3,'#ffedb7')}}
+   face(-29,16);flecks(0,-2,mood,.85);
+ }
+ cx.restore();
+}
+
+
+function showMoodText(mood,t){
+ if(panel==='gallery')return;
+ let line=pet.joy<48?'grrr...':mood==='sleepy'?'Zzz...':mood==='sad'?'sniff...':mood==='sick'?'bleh...':mood==='dirty'?'eww...':mood==='excited'?'Yip!':'',
+      speed=mood==='sleepy'?1100:800;
+ if(!line){if(pet.joy<48)line='grrr...';else if(Math.floor(t/4800)%3===0)line='chirp!';else return;}
+ // A quiet speech effect above the creature, never over the scene controls.
+ cx.save();cx.font='bold 11px monospace';cx.textAlign='left';
+ const x=12, y=65+Math.sin(t/speed)*2,w=Math.min(104,cx.measureText(line).width+19);
+ cx.fillStyle='#fff9dfeb';cx.fillRect(x,y,w,19);cx.strokeStyle='#5b8172';cx.lineWidth=1;cx.strokeRect(x+.5,y+.5,w-1,18);
+ cx.fillStyle='#355862';cx.fillText(line,x+9,y+13);cx.restore();
+}
+let lastAction='',lastActionTime=0;
+// Visual behavior director: actions have predictable lengths, while species have
+// distinct idles. Animation runs only on the visible canvas, never advances care.
+const motionSeed={mossling:1,petalhorn:2,ripplet:3,cindlet:4,cloudlet:5,frostell:6,sporekin:7,pebblot:8,moonbat:9,voltwing:10};
+function motion(t,mood,kind){
+ if(pet.asleep||pet.vacation||pet.caretakerUntil>Date.now()||mood==='sleepy'||mood==='sick')return {x:0,y:4,scale:.95,tilt:0,face:1,act:'sleep'};
+ const seed=motionSeed[kind]||1,rate=(kind==='pebblot'?0.65:kind==='moonbat'||kind==='cloudlet'?1.23:1),phase=(t/1000*rate+seed*1.33)%23;
+ const fliers=['moonbat','cloudlet','voltwing'].includes(kind);
+ if(phase<4.2){let u=phase/4.2;return {x:-24+u*43,y:fliers?-7-Math.sin(u*Math.PI*3)*3:Math.abs(Math.sin(u*Math.PI*7))*-3,scale:1,tilt:fliers?.035:Math.sin(u*Math.PI*8)*.025,face:1,act:fliers?'flutter':'walk'}}
+ if(phase<7.5)return {x:19,y:fliers?-7:1,scale:1,tilt:Math.sin(t/650)*.045,face:1,act:kind==='pebblot'?'inspect':'look'};
+ if(phase<12){let u=(phase-7.5)/4.5;return {x:19-u*42,y:fliers?-8-Math.sin(u*Math.PI*3)*3:Math.abs(Math.sin(u*Math.PI*7))*-3,scale:1,tilt:fliers?-.035:Math.sin(u*Math.PI*8)*.025,face:-1,act:fliers?'flutter':'walk'}}
+ if(phase<15)return {x:-23,y:3,scale:.96,tilt:-.035,face:-1,act:kind==='sporekin'?'spores':kind==='frostell'?'sniff':'rest'};
+ if(phase<17.5){let u=(phase-15)/2.5;return {x:-18+u*16,y:-Math.abs(Math.sin(u*Math.PI*2))*9,scale:1.01,tilt:Math.sin(u*Math.PI*2)*.055,face:1,act:kind==='ripplet'?'splash':kind==='cindlet'?'pounce':'hop'}}
+ return {x:0,y:0,scale:1,tilt:Math.sin(t/1700)*.018,face:1,act:kind==='moonbat'?'listen':kind==='voltwing'?'spark':kind==='mossling'?'leaf':'idle'};
+}
+function habitatMovement(t,mood,kind){const a=motion(t,mood,kind);let {x,y,scale,tilt,face,act}=a;
+ const dt=(performance.now()-lastActionTime)/2000;
+ if(dt>=0&&dt<1){
+   if(lastAction==='play'){y-=Math.abs(Math.sin(dt*Math.PI*4))*12;scale=1.05;tilt=Math.sin(dt*Math.PI*6)*.1;act='celebrate'}
+   if(lastAction==='feed'){y+=Math.sin(dt*Math.PI*10)*2;scale=.97+.025*Math.sin(dt*Math.PI*9);act='eat'}
+   if(lastAction==='clean'){tilt=Math.sin(dt*Math.PI*12)*.05;act='wash'}
+   if(lastAction==='rest'){scale=.94;y=5;act='sleep'}
+ }
+ return {x,y,scale,tilt,face,act,actionProgress:dt};
+}
+function actionScene(t,a,kind){
+ cx.save();const yy=178;const sparkle=(x,y,col)=>{cx.fillStyle=col;cx.fillRect(x-1,y-4,3,8);cx.fillRect(x-4,y-1,9,3)};
+ if(a.act==='eat'){
+  // Animated apple moves toward the creature; little crumbs fall after a bite.
+  const q=Math.max(0,Math.min(1,a.actionProgress));cx.fillStyle='#bc4b47';cx.beginPath();cx.arc(101+q*12,171-q*15,7*(1-q*.45),0,Math.PI*2);cx.fill();cx.fillStyle='#4f995b';cx.fillRect(100+q*12,160-q*15,5,4);
+  for(let k=0;k<4;k++){cx.fillStyle='#f1d287';cx.fillRect(117+k*5,173+((k*3)%7),2,2)}
+ }
+ if(a.act==='wash')for(let k=0;k<8;k++){let u=(t/600+k*.17)%1,x=76+(k*31)%110,y=178-u*50;sparkle(x,y,'#d5fbff')}
+ if(a.act==='sleep'){cx.fillStyle='#fff3d6';cx.font='bold 15px monospace';cx.fillText('Z',178,101);cx.font='bold 10px monospace';cx.fillText('z',190,113)}
+ if(a.act==='flutter'||a.act==='spark'){for(let i=0;i<3;i++)sparkle(84+i*36,156+Math.sin(t/430+i)*5,i===1?'#fff6ad':'#cff4ff')}
+ if(a.act==='spores'||a.act==='leaf'){for(let i=0;i<4;i++){cx.fillStyle=a.act==='leaf'?'#a3ca71':'#fce3a1';cx.fillRect(84+i*28,136+(i%2)*15+Math.sin(t/770+i)*5,3,3)}}
+ if(a.act==='splash')for(let i=0;i<5;i++)sparkle(79+i*19,177-Math.abs(Math.sin(t/320+i))*12,'#bceffc');
+ if(a.act==='celebrate'){sparkle(63,124,'#ffe0a0');sparkle(176,112,'#ffe0a0')}
+ cx.restore();
+}
+function frame(t){if(view==='pet'){cx.clearRect(0,0,240,248);backdrop(t);let mood=moodPreview||petMood(),stage=(panel==='gallery'||panel==='showcase')?galleryStage:pet.stage;const renderKind=(panel==='gallery'||panel==='showcase')?(galleryKind||pet.kind):pet.kind;const move=habitatMovement(t,mood,renderKind);
+if(panel==='showcase'&&animatedSpecies.includes(renderKind)&&galleryAction!=='auto'){move.act=galleryAction;move.x=0;move.y=0;move.scale=1;move.tilt=0;move.face=1;}
+cx.save();cx.translate(120+move.x,120+move.y);cx.rotate(move.tilt||0);cx.scale(move.scale*(move.face||1),move.scale);cx.translate(-120,-120);
+if(animatedSpecies.includes(renderKind))animatedPremium(renderKind,stage,mood,t,move.act);
+else if(illustratedSpecies.includes(renderKind))illustratedCreature(stage,mood,t);
+else if(stage===1)eggPet(t);
+else {cx.save();cx.translate(120,116);cx.scale(.46,.46);cx.translate(-120,-112);if(renderKind==='mossling')creature(stage,mood,t);else newCreature(stage,mood,t,renderKind);cx.restore();}
+cx.restore();
+actionScene(t,move,renderKind);
+if(panel==='showcase'&&animatedSpecies.includes(renderKind)){
+ const indicator=$('assetCheck');if(indicator){const frames=premiumFrames[renderKind]?.[stage]||[];
+ const ready=frames.filter(img=>img.complete&&img.naturalWidth>0).length;
+ const txt=ready===frames.length?`✓ ${ready}/${frames.length} animation frames loaded`:(ready===0?`⚠ 0/${frames.length} frames loaded — make sure assets folder is beside index.html`:`Loading artwork ${ready}/${frames.length} frames`);
+ if(indicator.textContent!==txt)indicator.textContent=txt;
+ indicator.classList.toggle('missing',ready===0&&performance.now()>2400);
+ }}
+if(panel==='showcase'&&animatedSpecies.includes(renderKind)&&galleryAction!=='auto'){
+ const labels={idle:'Hi!',walk:'Step, step!',eat:'Munch!',sleep:'Zzz...',play:'Yip!',clean:'Sparkle!',happy:'Hooray!',angry:'Grr...',dirty:'Bath time?',sick:'Achoo!'};
+ const msg=labels[galleryAction]||'Hi!';cx.save();cx.font='bold 11px monospace';let w=Math.min(120,cx.measureText(msg).width+18);cx.fillStyle='#fff8dfec';cx.fillRect(12,215,w,19);cx.strokeStyle='#5b8172';cx.strokeRect(12.5,215.5,w-1,18);cx.fillStyle='#355862';cx.fillText(msg,21,229);cx.restore();
+}else showMoodText(mood,t);
+if(pet.mess&&!pet.vacation){cx.save();cx.fillStyle='#7c5639';cx.fillRect(28,214,11,7);cx.fillRect(33,208,7,7);cx.fillStyle='#d0b783';cx.fillRect(30,209,3,2);cx.restore()}
+if(pet.asleep&&!pet.vacation){cx.save();cx.fillStyle='#263f55a8';cx.fillRect(0,176,240,72);cx.font='bold 16px monospace';cx.fillStyle='#fff5c6';cx.fillText('Z z z',175,157);cx.restore()}
+if(pet.vacation){P(12,99,216,25,'#f4f0d9df');cx.font='bold 11px monospace';cx.fillStyle='#345b58';cx.fillText('RESTING UNTIL YOU RETURN',20,115)}}requestAnimationFrame(frame)}
+meadowBg();drawEggs();if(pet.name)startPet();else {selected=-1;layerSelect()}
+let alreadyWelcomed=false;try{alreadyWelcomed=localStorage.getItem(WELCOME_KEY)==='seen'}catch(e){}if(!alreadyWelcomed){
+ $('splash').classList.remove('hidden');$('nameWrap').classList.add('hidden');
+ $('splashTitle').textContent='You found an Easter Egg!';
+ $('splashDesc').textContent='Congratulations! You discovered a hidden game in the Naches Learning Hub. There are more surprises tucked around the Hub. Keep the mystery alive rather than telling everyone exactly where to look — secret entrances may move! Your companion only needs one thoughtful care session a day.';
+ $('splashYes').textContent='Explore the Hatching Meadow';$('splashNo').textContent='Explore the Hatching Meadow';
+ const enter=()=>{$('splash').classList.add('hidden');try{localStorage.setItem(WELCOME_KEY,'seen')}catch(e){}};
+ $('splashYes').onclick=enter;$('splashNo').onclick=enter;
+ }
+requestAnimationFrame(frame);
+</script></body></html>
